@@ -1,6 +1,6 @@
 //
-//  TSTCentralManager.swift
-//  TSTTISensorTag
+//  STGCentralManager.swift
+//  STGTISensorTag
 //
 //  Created by Andre Muis on 5/9/16.
 //  Copyright © 2016 Andre Muis. All rights reserved.
@@ -15,7 +15,7 @@ import CoreBluetooth
 //@property (readonly, strong, nonatomic) CBCentralManager *centralManager;
 
 
-class TSTCentralManager : NSObject, CBCentralManagerDelegate
+class STGCentralManager : NSObject, CBCentralManagerDelegate
 {
     var centralManager : CBCentralManager!
     
@@ -41,9 +41,9 @@ class TSTCentralManager : NSObject, CBCentralManagerDelegate
     
     func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber)
     {
-        if let localName = advertisementData[TSTConstants.advertisementDataLocalNameKey] as? String
+        if let localName = advertisementData[STGConstants.advertisementDataLocalNameKey] as? String
         {
-            if localName == TSTConstants.advertisementDataLocalNameValue
+            if localName == STGConstants.advertisementDataLocalNameValue
             {
                 self.centralManager.connectPeripheral(peripheral, options: nil)
                 
@@ -52,12 +52,12 @@ class TSTCentralManager : NSObject, CBCentralManagerDelegate
             }
             else
             {
-                print("Advertisement data local name \(localName) not equal to \(TSTConstants.advertisementDataLocalNameValue)")
+                print("Advertisement data local name \(localName) not equal to \(STGConstants.advertisementDataLocalNameValue)")
             }
         }
         else
         {
-            print("Local name key \(TSTConstants.advertisementDataLocalNameKey) not found in advertisement data: \(advertisementData)")
+            print("Local name key \(STGConstants.advertisementDataLocalNameKey) not found in advertisement data: \(advertisementData)")
         }
     }
 

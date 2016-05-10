@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2AF4EF501CE18C7B006C2AC7 /* STGTISensorTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2AF4EF5A1CE18E14006C2AC7 /* TSTCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF581CE18E14006C2AC7 /* TSTCentralManager.swift */; };
-		2AF4EF5B1CE18E14006C2AC7 /* TSTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF591CE18E14006C2AC7 /* TSTConstants.swift */; };
+		2AF4EF5E1CE196F5006C2AC7 /* STGCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */; };
+		2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,8 +17,8 @@
 		2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGTISensorTag.h; sourceTree = "<group>"; };
 		2AF4EF511CE18C7B006C2AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AF4EF571CE18E14006C2AC7 /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = "<group>"; };
-		2AF4EF581CE18E14006C2AC7 /* TSTCentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTCentralManager.swift; sourceTree = "<group>"; };
-		2AF4EF591CE18E14006C2AC7 /* TSTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TSTConstants.swift; sourceTree = "<group>"; };
+		2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGCentralManager.swift; sourceTree = "<group>"; };
+		2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +52,8 @@
 			isa = PBXGroup;
 			children = (
 				2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */,
-				2AF4EF591CE18E14006C2AC7 /* TSTConstants.swift */,
-				2AF4EF581CE18E14006C2AC7 /* TSTCentralManager.swift */,
+				2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */,
+				2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */,
 				2AF4EF571CE18E14006C2AC7 /* ScratchPad.playground */,
 				2AF4EF511CE18C7B006C2AC7 /* Info.plist */,
 			);
@@ -98,6 +98,7 @@
 		2AF4EF431CE18C7B006C2AC7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = STG;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Andre Muis";
 				TargetAttributes = {
@@ -138,8 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AF4EF5A1CE18E14006C2AC7 /* TSTCentralManager.swift in Sources */,
-				2AF4EF5B1CE18E14006C2AC7 /* TSTConstants.swift in Sources */,
+				2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */,
+				2AF4EF5E1CE196F5006C2AC7 /* STGCentralManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
