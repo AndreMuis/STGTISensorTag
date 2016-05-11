@@ -7,16 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */; };
+		2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */; };
+		2AA5E7371CE29FEC00423F2E /* STGCentralManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */; };
+		2ACEB2881CE2BC0600918BAB /* STGCentralManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACEB2871CE2BC0600918BAB /* STGCentralManagerState.swift */; };
 		2AF4EF501CE18C7B006C2AC7 /* STGTISensorTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2AF4EF5E1CE196F5006C2AC7 /* STGCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */; };
 		2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2A426D6B1CE1A0350087F7FD /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = "<group>"; };
+		2AA5E71E1CE26C9300423F2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2AA5E7201CE26C9300423F2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2AA5E7231CE26C9300423F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2AA5E7251CE26C9300423F2E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2AA5E7281CE26C9300423F2E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2AA5E72A1CE26C9300423F2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerDelegate.swift; path = Protocols/STGCentralManagerDelegate.swift; sourceTree = "<group>"; };
+		2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerConnectionStatus.swift; path = Enumerations/STGCentralManagerConnectionStatus.swift; sourceTree = "<group>"; };
+		2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerError.swift; path = Enumerations/STGCentralManagerError.swift; sourceTree = "<group>"; };
+		2ACEB2871CE2BC0600918BAB /* STGCentralManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerState.swift; path = Enumerations/STGCentralManagerState.swift; sourceTree = "<group>"; };
 		2AF4EF4C1CE18C7B006C2AC7 /* STGTISensorTag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STGTISensorTag.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STGTISensorTag.h; sourceTree = "<group>"; };
 		2AF4EF511CE18C7B006C2AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2AF4EF571CE18E14006C2AC7 /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = "<group>"; };
 		2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGCentralManager.swift; sourceTree = "<group>"; };
 		2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -32,10 +46,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2AA5E71D1CE26C9300423F2E /* test */ = {
+			isa = PBXGroup;
+			children = (
+				2AA5E71E1CE26C9300423F2E /* AppDelegate.swift */,
+				2AA5E7201CE26C9300423F2E /* ViewController.swift */,
+				2AA5E7221CE26C9300423F2E /* Main.storyboard */,
+				2AA5E7251CE26C9300423F2E /* Assets.xcassets */,
+				2AA5E7271CE26C9300423F2E /* LaunchScreen.storyboard */,
+				2AA5E72A1CE26C9300423F2E /* Info.plist */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		2AA5E7301CE28A4000423F2E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		2AA5E7331CE28D7D00423F2E /* Enumerations */ = {
+			isa = PBXGroup;
+			children = (
+				2ACEB2871CE2BC0600918BAB /* STGCentralManagerState.swift */,
+				2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */,
+				2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */,
+			);
+			name = Enumerations;
+			sourceTree = "<group>";
+		};
 		2AF4EF421CE18C7B006C2AC7 = {
 			isa = PBXGroup;
 			children = (
 				2AF4EF4E1CE18C7B006C2AC7 /* STGTISensorTag */,
+				2A426D6B1CE1A0350087F7FD /* ScratchPad.playground */,
+				2AA5E71D1CE26C9300423F2E /* test */,
 				2AF4EF4D1CE18C7B006C2AC7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,10 +98,11 @@
 		2AF4EF4E1CE18C7B006C2AC7 /* STGTISensorTag */ = {
 			isa = PBXGroup;
 			children = (
+				2AA5E7331CE28D7D00423F2E /* Enumerations */,
+				2AA5E7301CE28A4000423F2E /* Protocols */,
 				2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */,
 				2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */,
 				2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */,
-				2AF4EF571CE18E14006C2AC7 /* ScratchPad.playground */,
 				2AF4EF511CE18C7B006C2AC7 /* Info.plist */,
 			);
 			path = STGTISensorTag;
@@ -99,6 +147,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = STG;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Andre Muis";
 				TargetAttributes = {
@@ -113,6 +162,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 2AF4EF421CE18C7B006C2AC7;
 			productRefGroup = 2AF4EF4D1CE18C7B006C2AC7 /* Products */;
@@ -139,12 +189,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AA5E7371CE29FEC00423F2E /* STGCentralManagerError.swift in Sources */,
+				2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */,
+				2ACEB2881CE2BC0600918BAB /* STGCentralManagerState.swift in Sources */,
 				2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */,
+				2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */,
 				2AF4EF5E1CE196F5006C2AC7 /* STGCentralManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2AA5E7221CE26C9300423F2E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AA5E7231CE26C9300423F2E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2AA5E7271CE26C9300423F2E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2AA5E7281CE26C9300423F2E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2AF4EF521CE18C7B006C2AC7 /* Debug */ = {

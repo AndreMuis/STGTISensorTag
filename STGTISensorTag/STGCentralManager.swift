@@ -8,100 +8,138 @@
 
 import CoreBluetooth
 
-//@interface TSTCentralManager () <CBCentralManagerDelegate>
-
-//@property (readonly, strong, nonatomic) id<TSTCentralManagerDelegate> delegate;
-
-//@property (readonly, strong, nonatomic) CBCentralManager *centralManager;
-
-
-class STGCentralManager : NSObject, CBCentralManagerDelegate
+public class STGCentralManager : NSObject, CBCentralManagerDelegate
 {
+    var delegate : STGCentralManagerDelegate!
     var centralManager : CBCentralManager!
+    var peripheral : CBPeripheral?
     
-    override init()
+    public init(delegate : STGCentralManagerDelegate)
     {
         super.init()
 
+        self.delegate = delegate
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        self.peripheral = nil
     }
 
-    func centralManagerDidUpdateState(central: CBCentralManager)
+    public func startScanningForPeripherals() throws
     {
-        // [self.delegate sensorTagManagerDidUpdateState: [central stateAsString]];
-        
-        if central.state == CBCentralManagerState.PoweredOn
+        do
         {
-            self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
-            
-            print("scanning")
-            // [self.delegate sensorTagManagerDidUpdateConnectionStatus: STConnectionStatusScanning];
+            try validateState()
         }
+        catch let error
+        {
+            throw error
+        }
+        
+        self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
+        
+        self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
     }
     
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber)
+    public func stopScanningForPeripherals() throws
+    {
+        do
+        {
+            try validateState()
+        }
+        catch let error
+        {
+            throw error
+        }
+        
+        self.centralManager.stopScan()
+        
+        self.delegate.centralManagerDidUpdateConnectionStatus(.None)
+    }
+    
+    func validateState() throws
+    {
+        switch self.centralManager.state
+        {
+        case .Unknown:
+            fallthrough
+            
+        case .Resetting:
+            fallthrough
+            
+        case .Unsupported:
+            fallthrough
+            
+        case .Unauthorized:
+            fallthrough
+            
+        case .PoweredOff:
+            throw STGCentralManagerError.NotInPoweredOnState
+            
+        case .PoweredOn:
+            break
+        }
+    }
+
+    // MARK: CBCentralManagerDelegate
+    
+    public func centralManagerDidUpdateState(central: CBCentralManager)
+    {
+        self.delegate.centralManagerDidUpdateState(central.state as STGCentralManagerState)
+    }
+    
+    public func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber)
     {
         if let localName = advertisementData[STGConstants.advertisementDataLocalNameKey] as? String
         {
             if localName == STGConstants.advertisementDataLocalNameValue
             {
+                self.peripheral = peripheral
                 self.centralManager.connectPeripheral(peripheral, options: nil)
                 
-                print("connecting")
-                // [self.delegate sensorTagManagerDidUpdateConnectionStatus: STConnectionStatusConnecting];
+                self.delegate.centralManagerDidUpdateConnectionStatus(.Connecting)
             }
-            else
-            {
-                print("Advertisement data local name \(localName) not equal to \(STGConstants.advertisementDataLocalNameValue)")
-            }
-        }
-        else
-        {
-            print("Local name key \(STGConstants.advertisementDataLocalNameKey) not found in advertisement data: \(advertisementData)")
         }
     }
 
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral)
+    public func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral)
     {
         self.centralManager.stopScan()
-            
-        print("connected")
-        // [self.delegate sensorTagManagerDidUpdateConnectionStatus: STConnectionStatusConnected];
+
+        self.delegate.centralManagerDidUpdateConnectionStatus(.Connected)
+
+        self.delegate.centralManager(self, didConnectPeripheral: peripheral)
     }
     
-    func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?)
+    public func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?)
     {
-        if let someError = error
-        {
-            print("Central manager disconnected sensor tag. Error = \(someError)")
-        }
+        self.peripheral = nil
         
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
-        
-        // [self.delegate sensorTagManagerDidUpdateConnectionStatus: STConnectionStatusScanning];
+
+        self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
+
+        self.delegate.centralManager(self, didDisconnectPeripheral: peripheral)
     }
 
-    func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?)
+    public func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?)
     {
-        if let someError = error
-        {
-            print("Central manager failed to connect to sensor tag. Error = \(someError)")
-        }
+        self.peripheral = nil
         
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
-        
-        // [self.delegate sensorTagManagerDidUpdateConnectionStatus: STConnectionStatusScanning];
+
+        self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
     }
+    
+    // MARK:
 }
 
 
 
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     
     
     
