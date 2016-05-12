@@ -23,4 +23,11 @@ if let number = dictionary["three"] as? Int
 }
 
 
+// hex values
+
+var hexValue : UInt8 = 0x01
+print (hexValue)
+
+hexValue = 0xFF
+print (hexValue)
 

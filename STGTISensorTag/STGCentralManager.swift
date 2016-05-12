@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGCentralManager : NSObject, CBCentralManagerDelegate
 {
-    var delegate : STGCentralManagerDelegate!
+    weak var delegate : STGCentralManagerDelegate!
     var centralManager : CBCentralManager!
     var peripheral : CBPeripheral?
     
@@ -23,7 +23,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
         self.peripheral = nil
     }
 
-    public func startScanningForPeripherals() throws
+    public func startScanningForSensorTags() throws
     {
         do
         {
@@ -39,7 +39,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
         self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
     }
     
-    public func stopScanningForPeripherals() throws
+    public func stopScanningForSensorTags() throws
     {
         do
         {
@@ -106,7 +106,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
 
         self.delegate.centralManagerDidUpdateConnectionStatus(.Connected)
 
-        self.delegate.centralManager(self, didConnectPeripheral: peripheral)
+        self.delegate.centralManager(self, didConnectSensorTagPeripheral: peripheral)
     }
     
     public func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?)
@@ -117,7 +117,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
 
         self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
 
-        self.delegate.centralManager(self, didDisconnectPeripheral: peripheral)
+        self.delegate.centralManager(self, didDisconnectSensorTagPeripheral: peripheral)
     }
 
     public func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?)
