@@ -67,12 +67,62 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer: STGAccelerometer)
     {
-        accelerometer.enable()
+        // accelerometer.enable()
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForBarometricPressureSensor sensor: STGBarometricPressureSensor)
+    {
+        // sensor.enable()
+    }
+
+    func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForGyroscope gyroscope: STGGyroscope)
+    {
+        // gyroscope.enable()
+    }
+
+    func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForHumiditySensor humiditySensor: STGHumiditySensor)
+    {
+        // humiditySensor.enable()
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForMagnetometer magnetometer: STGMagnetometer)
+    {
+        // magnetometer.enable()
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForTemperatureSensor temperatureSensor: STGTemperatureSensor)
+    {
+        temperatureSensor.enable()
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAcceleration acceleration: STGVector)
     {
-        print(acceleration)
+        print("acceleration = \(acceleration)")
+    }
+
+    func sensorTag(sensorTag: STGSensorTag, didUpdateSmoothedAcceleration acceleration: STGVector)
+    {
+        print("smoothed acceleration = \(acceleration)")
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didUpdateAngularVelocity angularVelocity: STGVector)
+    {
+        print("angular velocity = \(angularVelocity)")
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didUpdateRelativeHumidity relativeHumidity: Float)
+    {
+        print("relative humidity = \(relativeHumidity)")
+    }
+    
+    func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
+    {
+        print("magnetic field strength = \(magneticFieldStrength)")
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didUpdateTemperature temperature: Float)
+    {
+        print("temperature = \(temperature)")
     }
 }
 

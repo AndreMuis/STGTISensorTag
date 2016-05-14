@@ -24,7 +24,7 @@ public class STGAccelerometer
     
     weak var delegate : STGAccelerometerDelegate?
     
-    var rollingAcceleration : STGVector
+    var oldSmoothedAcceleration : STGVector
 
     init(delegate : STGAccelerometerDelegate)
     {
@@ -42,7 +42,7 @@ public class STGAccelerometer
         self.periodCharacteristicUUID = CBUUID(string: STGConstants.Accelerometer.periodCharacteristicUUIDString)
         self.periodCharacteristic = nil
         
-        self.rollingAcceleration = STGVector(x: 0.0, y: 0.0, z: 0.0)
+        self.oldSmoothedAcceleration = STGVector(x: 0.0, y: 0.0, z: 0.0)
     }
     
     public func enable()
@@ -57,27 +57,22 @@ public class STGAccelerometer
     
     func characteristicUpdated(characteristic : CBCharacteristic)
     {
-        print("characteristicUpdated")
-        
         if characteristic.UUID == self.dataCharacteristicUUID
         {
             if let value = characteristic.value
             {
                 let acceleration : STGVector = self.accelerationWithCharacteristicValue(value)
                 self.delegate?.accelerometer(self, didUpdateAcceleration: acceleration)
+                
+                let smoothedAcceleration : STGVector = self.smoothedAccelerationWithCharacteristicValue(value)
+                self.delegate?.accelerometer(self, didUpdateSmoothedAcceleration: smoothedAcceleration)
             }
-            
-            //[self.sensorTagDelegate sensorTagDidUpdateSmoothedAcceleration: [self smoothedAccelerationWithCharacteristicValue: characteristic.value]];
         }
     }
 
     func accelerationWithCharacteristicValue(characteristicValue : NSData) -> STGVector
     {
-        let byteCount = characteristicValue.length / sizeof(UInt8)
-        
-        var bytes = [UInt8](count: byteCount, repeatedValue: 0)
-        
-        characteristicValue.getBytes(&bytes, length: byteCount * sizeof(UInt8))
+        let bytes : [UInt8] = characteristicValue.unsignedIntegers
 
         let acceleration : STGVector = STGVector(x: Float(bytes[0]) / (256.0 / STGConstants.Accelerometer.range),
                                                  y: Float(bytes[1]) / (256.0 / STGConstants.Accelerometer.range),
@@ -86,56 +81,42 @@ public class STGAccelerometer
         return acceleration
     }
     
-
-    /*
-    
-    - (void)updateWithPeriodInMilliseconds: (int)periodInMilliseconds
+    func smoothedAccelerationWithCharacteristicValue(characteristicValue : NSData) -> STGVector
     {
-    uint8_t periodData = (uint8_t)(periodInMilliseconds / 10);
-    [self.sensorTagPeripheral writeValue: [NSData dataWithBytes: &periodData length: 1]
-    forCharacteristic: self.periodCharacteristic
-    type: CBCharacteristicWriteWithResponse];
-    }
-    
-    - (STAcceleration *)smoothedAccelerationWithCharacteristicValue: (NSData *)characteristicValue
-    {
-    STAcceleration *acceleration = [self accelerationWithCharacteristicValue: characteristicValue];
-    
-    self.rollingAcceleration.xComponent = (acceleration.xComponent * STAccelerometerHighPassFilteringFactor) +
-    (self.rollingAcceleration.xComponent * (1.0 - STAccelerometerHighPassFilteringFactor));
-    
-    self.rollingAcceleration.yComponent = (acceleration.yComponent * STAccelerometerHighPassFilteringFactor) +
-    (self.rollingAcceleration.yComponent * (1.0 - STAccelerometerHighPassFilteringFactor));
-    
-    self.rollingAcceleration.zComponent = (acceleration.zComponent * STAccelerometerHighPassFilteringFactor) +
-    (self.rollingAcceleration.zComponent * (1.0 - STAccelerometerHighPassFilteringFactor));
-    
-    acceleration.xComponent = acceleration.xComponent - self.rollingAcceleration.xComponent;
-    acceleration.yComponent = acceleration.yComponent - self.rollingAcceleration.yComponent;
-    acceleration.zComponent = acceleration.zComponent - self.rollingAcceleration.zComponent;
-    
-    return acceleration;
-    }
-    
-    @end
-    */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        let filteringFactor : Float = STGConstants.Accelerometer.lowPassFilteringFactor
 
-    
+        let acceleration : STGVector  = self.accelerationWithCharacteristicValue(characteristicValue)
+        
+        var smoothedAcceleration : STGVector = STGVector(x: 0.0, y: 0.0, z: 0.0)
+        
+        smoothedAcceleration.x = filteringFactor * acceleration.x + (1.0 - filteringFactor) * self.oldSmoothedAcceleration.x
+        smoothedAcceleration.y = filteringFactor * acceleration.y + (1.0 - filteringFactor) * self.oldSmoothedAcceleration.y
+        smoothedAcceleration.z = filteringFactor * acceleration.z + (1.0 - filteringFactor) * self.oldSmoothedAcceleration.z
+        
+        self.oldSmoothedAcceleration = smoothedAcceleration
+        
+        return smoothedAcceleration
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

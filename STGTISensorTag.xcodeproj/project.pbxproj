@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2A3F0BB21CE413BF005654A3 /* STGSensorTagDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3F0BB11CE413BF005654A3 /* STGSensorTagDelegate.swift */; };
+		2A858D9C1CE660A400B187B0 /* NSData+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858D9B1CE660A400B187B0 /* NSData+Bytes.swift */; };
+		2A858D9E1CE6960100B187B0 /* STGGyroscopeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858D9D1CE6960100B187B0 /* STGGyroscopeDelegate.swift */; };
+		2A858DA01CE6A10800B187B0 /* STGHumiditySensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */; };
+		2A858DA21CE6AB7900B187B0 /* STGMagnetometerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */; };
+		2A858DA41CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */; };
 		2AA254401CE37C4300584873 /* STGSensorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2543F1CE37C4300584873 /* STGSensorTag.swift */; };
 		2AA254421CE37FF100584873 /* STGAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254411CE37FF100584873 /* STGAccelerometer.swift */; };
 		2AA254441CE3800E00584873 /* STGButtonSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254431CE3800E00584873 /* STGButtonSensor.swift */; };
@@ -18,6 +23,7 @@
 		2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */; };
 		2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */; };
 		2AA5E7371CE29FEC00423F2E /* STGCentralManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */; };
+		2AB8F59D1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB8F59C1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift */; };
 		2ACEB2881CE2BC0600918BAB /* STGCentralManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ACEB2871CE2BC0600918BAB /* STGCentralManagerState.swift */; };
 		2AD9EB731CE3E08300D92050 /* STGHumiditySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9EB721CE3E08300D92050 /* STGHumiditySensor.swift */; };
 		2AD9EB751CE3E0D200D92050 /* STGBarometricPressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9EB741CE3E0D200D92050 /* STGBarometricPressureSensor.swift */; };
@@ -31,6 +37,11 @@
 /* Begin PBXFileReference section */
 		2A3F0BB11CE413BF005654A3 /* STGSensorTagDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGSensorTagDelegate.swift; sourceTree = "<group>"; };
 		2A426D6B1CE1A0350087F7FD /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = "<group>"; };
+		2A858D9B1CE660A400B187B0 /* NSData+Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Bytes.swift"; sourceTree = "<group>"; };
+		2A858D9D1CE6960100B187B0 /* STGGyroscopeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGGyroscopeDelegate.swift; path = Protocols/STGGyroscopeDelegate.swift; sourceTree = "<group>"; };
+		2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGHumiditySensorDelegate.swift; path = Protocols/STGHumiditySensorDelegate.swift; sourceTree = "<group>"; };
+		2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGMagnetometerDelegate.swift; path = Protocols/STGMagnetometerDelegate.swift; sourceTree = "<group>"; };
+		2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGTemperatureSensorDelegate.swift; path = Protocols/STGTemperatureSensorDelegate.swift; sourceTree = "<group>"; };
 		2AA2543F1CE37C4300584873 /* STGSensorTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGSensorTag.swift; sourceTree = "<group>"; };
 		2AA254411CE37FF100584873 /* STGAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGAccelerometer.swift; sourceTree = "<group>"; };
 		2AA254431CE3800E00584873 /* STGButtonSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGButtonSensor.swift; sourceTree = "<group>"; };
@@ -41,6 +52,7 @@
 		2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerDelegate.swift; path = Protocols/STGCentralManagerDelegate.swift; sourceTree = "<group>"; };
 		2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerConnectionStatus.swift; path = Enumerations/STGCentralManagerConnectionStatus.swift; sourceTree = "<group>"; };
 		2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerError.swift; path = Enumerations/STGCentralManagerError.swift; sourceTree = "<group>"; };
+		2AB8F59C1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGBarometricPressureSensorDelegate.swift; path = Protocols/STGBarometricPressureSensorDelegate.swift; sourceTree = "<group>"; };
 		2ACEB2871CE2BC0600918BAB /* STGCentralManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerState.swift; path = Enumerations/STGCentralManagerState.swift; sourceTree = "<group>"; };
 		2AD9EB721CE3E08300D92050 /* STGHumiditySensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGHumiditySensor.swift; sourceTree = "<group>"; };
 		2AD9EB741CE3E0D200D92050 /* STGBarometricPressureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGBarometricPressureSensor.swift; sourceTree = "<group>"; };
@@ -70,6 +82,11 @@
 				2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */,
 				2A3F0BB11CE413BF005654A3 /* STGSensorTagDelegate.swift */,
 				2AD9EB791CE3FD3F00D92050 /* STGAccelerometerDelegate.swift */,
+				2AB8F59C1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift */,
+				2A858D9D1CE6960100B187B0 /* STGGyroscopeDelegate.swift */,
+				2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */,
+				2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */,
+				2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -127,6 +144,7 @@
 				2AA254471CE3804100584873 /* STGMagnetometer.swift */,
 				2AA254491CE3805E00584873 /* STGRSSISensor.swift */,
 				2AA2544B1CE3807500584873 /* STGTemperatureSensor.swift */,
+				2A858D9B1CE660A400B187B0 /* NSData+Bytes.swift */,
 				2AF4EF511CE18C7B006C2AC7 /* Info.plist */,
 			);
 			path = STGTISensorTag;
@@ -214,22 +232,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				2AA5E7371CE29FEC00423F2E /* STGCentralManagerError.swift in Sources */,
+				2A858DA21CE6AB7900B187B0 /* STGMagnetometerDelegate.swift in Sources */,
 				2AA254481CE3804100584873 /* STGMagnetometer.swift in Sources */,
 				2AD9EB751CE3E0D200D92050 /* STGBarometricPressureSensor.swift in Sources */,
 				2AA2544C1CE3807500584873 /* STGTemperatureSensor.swift in Sources */,
+				2A858DA01CE6A10800B187B0 /* STGHumiditySensorDelegate.swift in Sources */,
+				2A858DA41CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift in Sources */,
 				2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */,
 				2AA2544A1CE3805E00584873 /* STGRSSISensor.swift in Sources */,
 				2AD9EB731CE3E08300D92050 /* STGHumiditySensor.swift in Sources */,
 				2AA254421CE37FF100584873 /* STGAccelerometer.swift in Sources */,
 				2AA254401CE37C4300584873 /* STGSensorTag.swift in Sources */,
 				2AA254461CE3802400584873 /* STGGyroscope.swift in Sources */,
+				2A858D9C1CE660A400B187B0 /* NSData+Bytes.swift in Sources */,
 				2ACEB2881CE2BC0600918BAB /* STGCentralManagerState.swift in Sources */,
 				2AD9EB781CE3F9BE00D92050 /* STGVector.swift in Sources */,
 				2AA254441CE3800E00584873 /* STGButtonSensor.swift in Sources */,
 				2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */,
 				2A3F0BB21CE413BF005654A3 /* STGSensorTagDelegate.swift in Sources */,
+				2A858D9E1CE6960100B187B0 /* STGGyroscopeDelegate.swift in Sources */,
 				2AD9EB7A1CE3FD3F00D92050 /* STGAccelerometerDelegate.swift in Sources */,
 				2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */,
+				2AB8F59D1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift in Sources */,
 				2AF4EF5E1CE196F5006C2AC7 /* STGCentralManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -31,3 +31,38 @@ print (hexValue)
 hexValue = 0xFF
 print (hexValue)
 
+
+// bitwise operations
+
+// 00000001
+let signed : Int8 = 1
+
+// 10000000
+signed << 7
+
+
+// 00000001
+let unsigned : UInt8 = 1
+
+// 10000000
+unsigned << 7
+
+
+Int16(truncatingBitPattern: 0xffff)
+
+
+let a = 0xff00
+
+a is UInt64
+
+
+
+
+
+
+
+
+
+
+
+

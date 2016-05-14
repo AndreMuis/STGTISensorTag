@@ -7,24 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2AB8F5951CE42CF300726D23 /* STGTISensorTag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD00B841CE42C5A00EDD09D /* STGTISensorTag.framework */; };
-		2AB8F5961CE42CF300726D23 /* STGTISensorTag.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD00B841CE42C5A00EDD09D /* STGTISensorTag.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2AB8F5991CE4BCF300726D23 /* STGTISensorTag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB8F5981CE4BCF300726D23 /* STGTISensorTag.framework */; };
+		2AB8F59A1CE4BCF300726D23 /* STGTISensorTag.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2AB8F5981CE4BCF300726D23 /* STGTISensorTag.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2AD00B6B1CE42A9800EDD09D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD00B6A1CE42A9800EDD09D /* AppDelegate.swift */; };
 		2AD00B6D1CE42A9800EDD09D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD00B6C1CE42A9800EDD09D /* ViewController.swift */; };
 		2AD00B701CE42A9800EDD09D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD00B6E1CE42A9800EDD09D /* Main.storyboard */; };
 		2AD00B721CE42A9800EDD09D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2AD00B711CE42A9800EDD09D /* Assets.xcassets */; };
 		2AD00B751CE42A9800EDD09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2AD00B731CE42A9800EDD09D /* LaunchScreen.storyboard */; };
-		2AD00B851CE42C5A00EDD09D /* STGTISensorTag.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AD00B841CE42C5A00EDD09D /* STGTISensorTag.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2AB8F5971CE42CF300726D23 /* Embed Frameworks */ = {
+		2AB8F59B1CE4BCF300726D23 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2AB8F5961CE42CF300726D23 /* STGTISensorTag.framework in Embed Frameworks */,
+				2AB8F59A1CE4BCF300726D23 /* STGTISensorTag.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2AB8F5981CE4BCF300726D23 /* STGTISensorTag.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = STGTISensorTag.framework; path = "/Users/andremuis/Library/Developer/Xcode/DerivedData/STGTISensorTag-caxjbstvckkgicddtmdfdatfkaor/Build/Products/Debug-iphoneos/STGTISensorTag.framework"; sourceTree = "<absolute>"; };
 		2AD00B671CE42A9800EDD09D /* STGTISensorTagDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STGTISensorTagDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AD00B6A1CE42A9800EDD09D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2AD00B6C1CE42A9800EDD09D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -39,7 +39,6 @@
 		2AD00B711CE42A9800EDD09D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2AD00B741CE42A9800EDD09D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2AD00B761CE42A9800EDD09D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2AD00B841CE42C5A00EDD09D /* STGTISensorTag.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = STGTISensorTag.framework; path = "../../../Library/Developer/Xcode/DerivedData/STGTISensorTag-caxjbstvckkgicddtmdfdatfkaor/Build/Products/Debug-iphoneos/STGTISensorTag.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,8 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AD00B851CE42C5A00EDD09D /* STGTISensorTag.framework in Frameworks */,
-				2AB8F5951CE42CF300726D23 /* STGTISensorTag.framework in Frameworks */,
+				2AB8F5991CE4BCF300726D23 /* STGTISensorTag.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +56,7 @@
 		2AD00B5E1CE42A9800EDD09D = {
 			isa = PBXGroup;
 			children = (
-				2AD00B841CE42C5A00EDD09D /* STGTISensorTag.framework */,
+				2AB8F5981CE4BCF300726D23 /* STGTISensorTag.framework */,
 				2AD00B691CE42A9800EDD09D /* STGTISensorTagDemo */,
 				2AD00B681CE42A9800EDD09D /* Products */,
 			);
@@ -95,7 +93,7 @@
 				2AD00B631CE42A9800EDD09D /* Sources */,
 				2AD00B641CE42A9800EDD09D /* Frameworks */,
 				2AD00B651CE42A9800EDD09D /* Resources */,
-				2AB8F5971CE42CF300726D23 /* Embed Frameworks */,
+				2AB8F59B1CE4BCF300726D23 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
