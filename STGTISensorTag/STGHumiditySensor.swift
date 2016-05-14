@@ -12,6 +12,8 @@ public class STGHumiditySensor
 {
     weak var delegate : STGHumiditySensorDelegate?
 
+    var measurementPeriod : Int
+
     let serviceUUID : CBUUID
     var service : CBService?
     
@@ -28,6 +30,8 @@ public class STGHumiditySensor
     {
         self.delegate = delegate
 
+        self.measurementPeriod = 0
+
         self.serviceUUID = CBUUID(string: STGConstants.HumiditySensor.serviceUUIDString)
         self.service = nil
     
@@ -41,14 +45,16 @@ public class STGHumiditySensor
         self.periodCharacteristic = nil
     }
 
-    public func enable()
+    public func enable(measurementPeriodInMilliseconds measurementPeriod : Int)
     {
-        self.delegate?.humiditySensor(self, updateEnabledStateTo: true)
+        self.measurementPeriod = measurementPeriod
+        
+        self.delegate?.humiditySensorEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.humiditySensor(self, updateEnabledStateTo: false)
+        self.delegate?.humiditySensorDisable(self)
     }
 
     func characteristicUpdated(characteristic : CBCharacteristic)

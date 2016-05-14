@@ -8,7 +8,8 @@
 
 protocol STGMagnetometerDelegate : class
 {
-    func magnetometer(magnetometer : STGMagnetometer, updateEnabledStateTo enabled : Bool)
-    
+    func magnetometerEnable(magnetometer : STGMagnetometer, measurementPeriod period : Int)
+    func magnetometerDisable(magnetometer : STGMagnetometer)
+
     func magnetometer(magnetometer : STGMagnetometer, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
 }

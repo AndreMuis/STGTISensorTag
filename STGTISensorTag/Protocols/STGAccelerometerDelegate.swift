@@ -8,8 +8,9 @@
 
 protocol STGAccelerometerDelegate : class
 {
-    func accelerometer(accelerometer : STGAccelerometer, updateEnabledStateTo enabled : Bool)
-
+    func accelerometerEnable(accelerometer : STGAccelerometer, measurementPeriod period : Int)
+    func accelerometerDisable(accelerometer : STGAccelerometer)
+    
     func accelerometer(accelerometer : STGAccelerometer, didUpdateAcceleration acceleration : STGVector)
     func accelerometer(accelerometer : STGAccelerometer, didUpdateSmoothedAcceleration acceleration : STGVector)
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-struct STGConstants
+public struct STGConstants
 {
     static let advertisementDataLocalNameKey : String = "kCBAdvDataLocalName"
     static let advertisementDataLocalNameValue : String = "SensorTag"
@@ -14,7 +14,9 @@ struct STGConstants
     static let sensorEnableByte : UInt8 = 0x01
     static let sensorDisableByte : UInt8 = 0x00
 
-    struct Accelerometer
+    public static let defaultSensorMeasurementPeriodInMilliseconds : Int = 1000
+
+    public struct Accelerometer
     {
         static let serviceUUIDString : String = "F000AA10-0451-4000-B000-000000000000"
 
@@ -23,22 +25,22 @@ struct STGConstants
         static let periodCharacteristicUUIDString : String = "F000AA13-0451-4000-b000-000000000000"
         
         static let range : Float = 4.0
-        static let measurementPeriodInMilliseconds : Int = 100
-        static let lowPassFilteringFactor : Float = 0.2
+        public static let lowPassFilteringFactor : Float = 0.2
     }
     
-    struct BarometricPressureSensor
+    public struct BarometricPressureSensor
     {
         static let serviceUUIDString : String = "F000AA40-0451-4000-B000-000000000000"
 
         static let dataCharacteristicUUIDString : String = "F000AA41-0451-4000-B000-000000000000"
         static let configurationCharacteristicUUIDString : String = "F000AA42-0451-4000-B000-000000000000"
         static let calibrationCharacteristicUUIDString : String = "F000AA43-0451-4000-B000-000000000000"
+        static let periodCharacteristicUUIDString : String = "F000AA44-0451-4000-B000-000000000000"
 
         static let calibrationByte : UInt8 = 0x02
     }
 
-    struct Gyroscope
+    public struct Gyroscope
     {
         static let serviceUUIDString : String = "F000AA50-0451-4000-B000-000000000000"
 
@@ -50,7 +52,7 @@ struct STGConstants
         static let range : Float = 500.0
     }
     
-    struct HumiditySensor
+    public struct HumiditySensor
     {
         static let serviceUUIDString : String = "F000AA20-0451-4000-B000-000000000000"
         
@@ -59,7 +61,7 @@ struct STGConstants
         static let periodCharacteristicUUIDString : String = "F000AA23-0451-4000-B000-000000000000"
     }
     
-    struct Magnetometer
+    public struct Magnetometer
     {
         static let serviceUUIDString : String = "F000AA30-0451-4000-B000-000000000000"
 
@@ -70,7 +72,14 @@ struct STGConstants
         static let range : Float = 2000.0
     }
     
-    struct TemperatureSensor
+    public struct SimpleKeysService
+    {
+        static let serviceUUIDString : String = "FFE0"
+
+        static let dataCharacteristicUUIDString : String = "FFE1"
+    }
+
+    public struct TemperatureSensor
     {
         static let serviceUUIDString : String = "F000AA00-0451-4000-B000-000000000000"
 

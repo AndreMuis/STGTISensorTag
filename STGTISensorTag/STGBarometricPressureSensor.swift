@@ -10,6 +10,10 @@ import CoreBluetooth
 
 public class STGBarometricPressureSensor
 {
+    weak var delegate : STGBarometricPressureSensorDelegate?
+    
+    var measurementPeriod : Int
+
     let serviceUUID : CBUUID
     var service : CBService?
 
@@ -22,7 +26,8 @@ public class STGBarometricPressureSensor
     let calibrationCharacteristicUUID : CBUUID
     var calibrationCharacteristic : CBCharacteristic?
 
-    weak var delegate : STGBarometricPressureSensorDelegate?
+    let periodCharacteristicUUID : CBUUID
+    var periodCharacteristic : CBCharacteristic?
 
     var calibrationValue1 : UInt16?
     var calibrationValue2 : UInt16?
@@ -37,6 +42,8 @@ public class STGBarometricPressureSensor
     {
         self.delegate = delegate
         
+        self.measurementPeriod = 0
+        
         self.serviceUUID = CBUUID(string: STGConstants.BarometricPressureSensor.serviceUUIDString)
         self.service = nil
     
@@ -48,16 +55,21 @@ public class STGBarometricPressureSensor
 
         self.calibrationCharacteristicUUID = CBUUID(string: STGConstants.BarometricPressureSensor.calibrationCharacteristicUUIDString)
         self.calibrationCharacteristic = nil
+
+        self.periodCharacteristicUUID = CBUUID(string: STGConstants.BarometricPressureSensor.periodCharacteristicUUIDString)
+        self.periodCharacteristic = nil
     }
     
-    public func enable()
+    public func enable(measurementPeriodInMilliseconds measurementPeriod : Int)
     {
+        self.measurementPeriod = measurementPeriod
+        
         self.delegate?.barometricPressureSensorGetCalibrationValues(self)
     }
     
     public func disable()
     {
-        self.delegate?.barometricPressureSensor(self, updateEnabledStateTo: false)
+        self.delegate?.barometricPressureSensorDisable(self)
     }
     
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -68,13 +80,13 @@ public class STGBarometricPressureSensor
             {
                 self.getCalibrationValuesFromCharacteristicValue(value)
                 
-                self.delegate?.barometricPressureSensor(self, updateEnabledStateTo: true)
+                self.delegate?.barometricPressureSensorEnable(self, measurementPeriod: self.measurementPeriod)
             }
             else if characteristic.UUID == self.dataCharacteristicUUID
             {
-                let pressureInMillibars : Int = self.pressureInMillibarsWithCharacteristicValue(value)
-                
-                print(pressureInMillibars)
+                let pressure : Int = self.pressureWithCharacteristicValue(value)
+             
+                self.delegate?.barometricPressureSensor(self, didUpdatePressure: pressure)
             }
         }
     }
@@ -94,15 +106,13 @@ public class STGBarometricPressureSensor
         self.calibrationValue8 = Int16(truncatingBitPattern: UInt32(bytes[14] & 0xff) | ((UInt32(bytes[15]) << 8) & 0xff00))
     }
     
-    func pressureInMillibarsWithCharacteristicValue(characteristicValue : NSData) -> Int
+    func pressureWithCharacteristicValue(characteristicValue : NSData) -> Int
     {
         let bytes : [UInt8] = characteristicValue.unsignedIntegers
      
         let temperature : Int = Int(UInt16(bytes[0] & 0xff) | ((UInt16(bytes[1]) << 8) & 0xff00))
         
-        // let S : Int = Int(self.calibrationValue3!) + (Int(self.calibrationValue4!) * temperature) / (1 << 17) + (Int(self.calibrationValue5!) * (temperature * temperature)) / (1 << 34)
-        
-        let S : Int = 1
+        let S : Int = Int(self.calibrationValue3!) + (Int(self.calibrationValue4!) * temperature) / (1 << 17) + (Int(self.calibrationValue5!) * (temperature * temperature)) / (1 << 34)
         
         let O : Int = Int(self.calibrationValue6!) * (1 << 14) + (Int(self.calibrationValue7!) * temperature) / (1 << 3) + (Int(self.calibrationValue8!) * (temperature * temperature)) / (1 << 19)
         

@@ -8,7 +8,8 @@
 
 protocol STGGyroscopeDelegate : class
 {
-    func gyroscope(gyroscope : STGGyroscope, updateEnabledStateTo enabled : Bool)
+    func gyroscopeEnable(gyroscope : STGGyroscope, measurementPeriod period : Int)
+    func gyroscopeDisable(gyroscope : STGGyroscope)
 
     func gyroscope(gyroscope : STGGyroscope, didUpdateAngularVelocity angularVelocity : STGVector)
 }

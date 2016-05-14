@@ -13,10 +13,15 @@ public protocol STGSensorTagDelegate : class
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForGyroscope gyroscope : STGGyroscope)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForHumiditySensor humiditySensor : STGHumiditySensor)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForMagnetometer magnetometer : STGMagnetometer)
+    func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForSimpleKeysService simpleKeysService : STGSimpleKeysService)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForTemperatureSensor temperatureSensor : STGTemperatureSensor)
+    
+    func sensorTag(sensorTag : STGSensorTag, didUpdateRSSI rssi : NSNumber?)
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateAcceleration acceleration : STGVector)
     func sensorTag(sensorTag : STGSensorTag, didUpdateSmoothedAcceleration acceleration : STGVector)
+
+    func sensorTag(sensorTag : STGSensorTag, didUpdatePressure pressure : Int)
 
     func sensorTag(sensorTag : STGSensorTag, didUpdateAngularVelocity angularVelocity : STGVector)
     
@@ -24,7 +29,9 @@ public protocol STGSensorTagDelegate : class
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
 
-    func sensorTag(sensorTag : STGSensorTag, didUpdateTemperature temperature : Float)
+    func sensorTag(sensorTag : STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
+
+    func sensorTag(sensorTag : STGSensorTag, didUpdateAmbientTemperature temperature : Float)
 }
 
 

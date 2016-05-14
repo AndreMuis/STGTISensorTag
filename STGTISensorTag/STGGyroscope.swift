@@ -12,6 +12,8 @@ public class STGGyroscope
 {
     weak var delegate : STGGyroscopeDelegate?
 
+    var measurementPeriod : Int
+
     let serviceUUID : CBUUID
     var service : CBService?
     
@@ -27,7 +29,9 @@ public class STGGyroscope
     init(delegate : STGGyroscopeDelegate)
     {
         self.delegate = delegate
-        
+       
+        self.measurementPeriod = 0
+
         self.serviceUUID = CBUUID(string: STGConstants.Gyroscope.serviceUUIDString)
         self.service = nil
         
@@ -41,16 +45,18 @@ public class STGGyroscope
         self.periodCharacteristic = nil
     }
     
-    public func enable()
+    public func enable(measurementPeriodInMilliseconds measurementPeriod : Int)
     {
-        self.delegate?.gyroscope(self, updateEnabledStateTo: true)
+        self.measurementPeriod = measurementPeriod
+        
+        self.delegate?.gyroscopeEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.gyroscope(self, updateEnabledStateTo: false)
+        self.delegate?.gyroscopeDisable(self)
     }
-    
+
     func characteristicUpdated(characteristic : CBCharacteristic)
     {
         if let value = characteristic.value
@@ -68,14 +74,14 @@ public class STGGyroscope
     {
         let bytes : [UInt8] = characteristicValue.unsignedIntegers
     
-        let rawX : Int16 = Int16(truncatingBitPattern: UInt32(bytes[0] & 0xff) | ((UInt32(bytes[1]) << 8) & 0xff00))
-        let x : Float = ((Float(rawX) * 1.0) / (65536 / STGConstants.Gyroscope.range)) * -1
+        let xRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[0] & 0xff) | ((UInt32(bytes[1]) << 8) & 0xff00))
+        let x : Float = -1.0 * ((Float(xRaw) / 65536.0) * STGConstants.Gyroscope.range)
         
-        let rawY : Int16 = Int16(truncatingBitPattern: UInt32(bytes[2] & 0xff) | ((UInt32(bytes[3]) << 8) & 0xff00))
-        let y : Float = ((Float(rawY) * 1.0) / (65536 / STGConstants.Gyroscope.range)) * -1
+        let yRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[2] & 0xff) | ((UInt32(bytes[3]) << 8) & 0xff00))
+        let y : Float = -1.0 * ((Float(yRaw) / 65536.0) * STGConstants.Gyroscope.range)
 
-        let rawZ : Int16 = Int16(truncatingBitPattern: UInt32(bytes[4] & 0xff) | ((UInt32(bytes[5]) << 8) & 0xff00))
-        let z : Float = ((Float(rawZ) * 1.0) / (65536 / STGConstants.Gyroscope.range))
+        let zRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[4] & 0xff) | ((UInt32(bytes[5]) << 8) & 0xff00))
+        let z : Float = (Float(zRaw) / 65536.0) * STGConstants.Gyroscope.range
         
         let angularVelocity = STGVector(x: x, y: y, z: z)
         

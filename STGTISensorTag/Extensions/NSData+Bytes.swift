@@ -20,4 +20,15 @@ extension NSData
     
         return bytes
     }
+
+    var signedIntegers : [Int8]
+    {
+        let byteCount = self.length / sizeof(Int8)
+        
+        var bytes = [Int8](count: byteCount, repeatedValue: 0)
+        
+        self.getBytes(&bytes, length: byteCount * sizeof(Int8))
+        
+        return bytes
+    }
 }

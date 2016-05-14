@@ -8,7 +8,8 @@
 
 protocol STGHumiditySensorDelegate : class
 {
-    func humiditySensor(humiditySensor : STGHumiditySensor, updateEnabledStateTo enabled : Bool)
+    func humiditySensorEnable(humiditySensor : STGHumiditySensor, measurementPeriod period : Int)
+    func humiditySensorDisable(humiditySensor : STGHumiditySensor)
     
     func humiditySensor(humiditySensor : STGHumiditySensor, didUpdateRelativeHumidity relativeHumidity : Float)
 }

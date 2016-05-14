@@ -12,6 +12,8 @@ public class STGMagnetometer
 {
     weak var delegate : STGMagnetometerDelegate?
 
+    var measurementPeriod : Int
+
     let serviceUUID : CBUUID
     var service : CBService?
     
@@ -28,6 +30,8 @@ public class STGMagnetometer
     {
         self.delegate = delegate
         
+        self.measurementPeriod = 0
+
         self.serviceUUID = CBUUID(string: STGConstants.Magnetometer.serviceUUIDString)
         self.service = nil
         
@@ -37,18 +41,20 @@ public class STGMagnetometer
         self.configurationCharacteristicUUID = CBUUID(string: STGConstants.Magnetometer.configurationCharacteristicUUIDString)
         self.configurationCharacteristic = nil
         
-        self.periodCharacteristicUUID = CBUUID(string: STGConstants.Magnetometer.configurationCharacteristicUUIDString)
+        self.periodCharacteristicUUID = CBUUID(string: STGConstants.Magnetometer.periodCharacteristicUUIDString)
         self.periodCharacteristic = nil
     }
     
-    public func enable()
+    public func enable(measurementPeriodInMilliseconds measurementPeriod : Int)
     {
-        self.delegate?.magnetometer(self, updateEnabledStateTo: true)
+        self.measurementPeriod = measurementPeriod
+        
+        self.delegate?.magnetometerEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.magnetometer(self, updateEnabledStateTo: false)
+        self.delegate?.magnetometerDisable(self)
     }
 
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -68,14 +74,14 @@ public class STGMagnetometer
     {
         let bytes : [UInt8] = characteristicValue.unsignedIntegers;
         
-        let rawX : Int16 = Int16(truncatingBitPattern: UInt32(bytes[0] & 0xff) | ((UInt32(bytes[1]) << 8) & 0xff00))
-        let x : Float = ((Float(rawX) * 1.0) / (65536 / STGConstants.Magnetometer.range)) * -1
+        let xRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[0] & 0xff) | ((UInt32(bytes[1]) << 8) & 0xff00))
+        let x : Float = -1.0 * (Float(xRaw) / 65536.0) * STGConstants.Magnetometer.range
         
-        let rawY : Int16 = Int16(truncatingBitPattern: UInt32(bytes[2] & 0xff) | ((UInt32(bytes[3]) << 8) & 0xff00))
-        let y : Float = ((Float(rawY) * 1.0) / (65536 / STGConstants.Magnetometer.range)) * -1
+        let yRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[2] & 0xff) | ((UInt32(bytes[3]) << 8) & 0xff00))
+        let y : Float = -1.0 * (Float(yRaw) / 65536.0) * STGConstants.Magnetometer.range
         
-        let rawZ : Int16 = Int16(truncatingBitPattern: UInt32(bytes[4] & 0xff) | ((UInt32(bytes[5]) << 8) & 0xff00))
-        let z : Float = ((Float(rawZ) * 1.0) / (65536 / STGConstants.Magnetometer.range))
+        let zRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[4] & 0xff) | ((UInt32(bytes[5]) << 8) & 0xff00))
+        let z : Float = (Float(zRaw) / 65536.0) * STGConstants.Magnetometer.range
 
         let magneticFieldStrength : STGVector = STGVector(x: x, y: y, z: z)
         

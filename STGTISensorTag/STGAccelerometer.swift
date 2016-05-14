@@ -10,6 +10,11 @@ import CoreBluetooth
 
 public class STGAccelerometer
 {
+    weak var delegate : STGAccelerometerDelegate?
+
+    var measurementPeriod : Int
+    var lowPassFilteringFactor : Float
+    
     let serviceUUID : CBUUID
     var service : CBService?
 
@@ -22,13 +27,14 @@ public class STGAccelerometer
     let periodCharacteristicUUID : CBUUID
     var periodCharacteristic : CBCharacteristic?
     
-    weak var delegate : STGAccelerometerDelegate?
-    
     var oldSmoothedAcceleration : STGVector
 
     init(delegate : STGAccelerometerDelegate)
     {
         self.delegate = delegate
+    
+        self.measurementPeriod = 0
+        self.lowPassFilteringFactor = 0.0
         
         self.serviceUUID = CBUUID(string: STGConstants.Accelerometer.serviceUUIDString)
         self.service = nil
@@ -45,14 +51,17 @@ public class STGAccelerometer
         self.oldSmoothedAcceleration = STGVector(x: 0.0, y: 0.0, z: 0.0)
     }
     
-    public func enable()
+    public func enable(measurementPeriodInMilliseconds measurementPeriod : Int, lowPassFilteringFactor : Float)
     {
-        self.delegate?.accelerometer(self, updateEnabledStateTo: true)
+        self.measurementPeriod = measurementPeriod
+        self.lowPassFilteringFactor = lowPassFilteringFactor
+        
+        self.delegate?.accelerometerEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.accelerometer(self, updateEnabledStateTo: false)
+        self.delegate?.accelerometerDisable(self)
     }
     
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -72,26 +81,24 @@ public class STGAccelerometer
 
     func accelerationWithCharacteristicValue(characteristicValue : NSData) -> STGVector
     {
-        let bytes : [UInt8] = characteristicValue.unsignedIntegers
+        let bytes : [Int8] = characteristicValue.signedIntegers
 
-        let acceleration : STGVector = STGVector(x: Float(bytes[0]) / (256.0 / STGConstants.Accelerometer.range),
-                                                 y: Float(bytes[1]) / (256.0 / STGConstants.Accelerometer.range),
-                                                 z: Float(bytes[2]) / (256.0 / STGConstants.Accelerometer.range))
+        let acceleration : STGVector = STGVector(x: -1.0 * (Float(bytes[0]) / 64.0) * STGConstants.Accelerometer.range,
+                                                 y: -1.0 * (Float(bytes[1]) / 64.0) * STGConstants.Accelerometer.range,
+                                                 z: -1.0 * (Float(bytes[2]) / 64.0) * STGConstants.Accelerometer.range)
         
         return acceleration
     }
     
     func smoothedAccelerationWithCharacteristicValue(characteristicValue : NSData) -> STGVector
     {
-        let filteringFactor : Float = STGConstants.Accelerometer.lowPassFilteringFactor
-
         let acceleration : STGVector  = self.accelerationWithCharacteristicValue(characteristicValue)
         
         var smoothedAcceleration : STGVector = STGVector(x: 0.0, y: 0.0, z: 0.0)
         
-        smoothedAcceleration.x = filteringFactor * acceleration.x + (1.0 - filteringFactor) * self.oldSmoothedAcceleration.x
-        smoothedAcceleration.y = filteringFactor * acceleration.y + (1.0 - filteringFactor) * self.oldSmoothedAcceleration.y
-        smoothedAcceleration.z = filteringFactor * acceleration.z + (1.0 - filteringFactor) * self.oldSmoothedAcceleration.z
+        smoothedAcceleration.x = self.lowPassFilteringFactor * acceleration.x + (1.0 - self.lowPassFilteringFactor) * self.oldSmoothedAcceleration.x
+        smoothedAcceleration.y = self.lowPassFilteringFactor * acceleration.y + (1.0 - self.lowPassFilteringFactor) * self.oldSmoothedAcceleration.y
+        smoothedAcceleration.z = self.lowPassFilteringFactor * acceleration.z + (1.0 - self.lowPassFilteringFactor) * self.oldSmoothedAcceleration.z
         
         self.oldSmoothedAcceleration = smoothedAcceleration
         

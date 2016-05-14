@@ -16,6 +16,7 @@ public class STGSensorTag :
     STGGyroscopeDelegate,
     STGHumiditySensorDelegate,
     STGMagnetometerDelegate,
+    STGSimpleKeysServiceDelegate,
     STGTemperatureSensorDelegate
 {
     weak var delegate : STGSensorTagDelegate!
@@ -29,6 +30,7 @@ public class STGSensorTag :
     var humiditySensor : STGHumiditySensor!
     var magnetometer : STGMagnetometer!
     var rssiSensor : STGRSSISensor!
+    var simpleKeysService : STGSimpleKeysService!
     var temperatureSensor : STGTemperatureSensor!
 
     public init(delegate : STGSensorTagDelegate, peripheral: CBPeripheral)
@@ -46,9 +48,15 @@ public class STGSensorTag :
         self.humiditySensor = STGHumiditySensor(delegate: self)
         self.magnetometer = STGMagnetometer(delegate: self)
         self.rssiSensor = STGRSSISensor()
+        self.simpleKeysService = STGSimpleKeysService(delegate: self)
         self.temperatureSensor = STGTemperatureSensor(delegate: self)
     }
 
+    public func readRSSI()
+    {
+        self.peripheral.readRSSI()
+    }
+    
     public func discoverServices()
     {
         self.peripheral.delegate = self;
@@ -57,6 +65,14 @@ public class STGSensorTag :
 
     // MARK: CBPeripheralDelegate
     
+    public func peripheralDidUpdateRSSI(peripheral: CBPeripheral, error: NSError?)
+    {
+        if error == nil
+        {
+            self.delegate.sensorTag(self, didUpdateRSSI: peripheral.RSSI)
+        }
+    }
+
     public func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?)
     {
         if error == nil
@@ -94,6 +110,7 @@ public class STGSensorTag :
                     self.barometricPressureSensor.dataCharacteristic = characteristics.filter({$0.UUID == self.barometricPressureSensor.dataCharacteristicUUID}).first
                     self.barometricPressureSensor.configurationCharacteristic = characteristics.filter({$0.UUID == self.barometricPressureSensor.configurationCharacteristicUUID}).first
                     self.barometricPressureSensor.calibrationCharacteristic = characteristics.filter({$0.UUID == self.barometricPressureSensor.calibrationCharacteristicUUID}).first
+                    self.barometricPressureSensor.periodCharacteristic = characteristics.filter({$0.UUID == self.barometricPressureSensor.periodCharacteristicUUID}).first
                     
                     self.delegate.sensorTag(self, didDiscoverCharacteristicsForBarometricPressureSensor: self.barometricPressureSensor)
 
@@ -124,6 +141,13 @@ public class STGSensorTag :
                     
                     self.delegate.sensorTag(self, didDiscoverCharacteristicsForMagnetometer: self.magnetometer)
 
+                case self.simpleKeysService.serviceUUID:
+                    self.simpleKeysService.service = service
+                    
+                    self.simpleKeysService.dataCharacteristic = characteristics.filter({$0.UUID == self.simpleKeysService.dataCharacteristicUUID}).first
+                    
+                    self.delegate.sensorTag(self, didDiscoverCharacteristicsForSimpleKeysService: self.simpleKeysService)
+
                 case self.temperatureSensor.serviceUUID:
                     self.temperatureSensor.service = service
                 
@@ -140,17 +164,52 @@ public class STGSensorTag :
         }
     }
     
-    // MARK: STGAccelerometerDelegate
-    
-    func accelerometer(accelerometer: STGAccelerometer, updateEnabledStateTo enabled: Bool)
+    public func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?)
     {
-        self.updateSensorEnabledState(self.accelerometer.configurationCharacteristic, enabled: enabled)
+        switch characteristic.service.UUID
+        {
+        case self.accelerometer.serviceUUID:
+            self.accelerometer.characteristicUpdated(characteristic)
+            
+        case self.barometricPressureSensor.serviceUUID:
+            self.barometricPressureSensor.characteristicUpdated(characteristic)
+            
+        case self.gyroscope.serviceUUID:
+            self.gyroscope.characteristicUpdated(characteristic)
+            
+        case self.humiditySensor.serviceUUID:
+            self.humiditySensor.characteristicUpdated(characteristic)
+            
+        case self.magnetometer.serviceUUID:
+            self.magnetometer.characteristicUpdated(characteristic)
+            
+        case self.simpleKeysService.serviceUUID:
+            self.simpleKeysService.characteristicUpdated(characteristic)
 
-        self.updateSensorNotificationsEnabledState(self.accelerometer.dataCharacteristic, enabled: enabled)
-
-        self.updateSensorMeasurementPeriod(self.accelerometer.periodCharacteristic, periodInMilliseconds: STGConstants.Accelerometer.measurementPeriodInMilliseconds)
+        case self.temperatureSensor.serviceUUID:
+            self.temperatureSensor.characteristicUpdated(characteristic)
+            
+        default:
+            break
+        }
     }
     
+    // MARK: STGAccelerometerDelegate
+    
+    func accelerometerEnable(accelerometer: STGAccelerometer, measurementPeriod period: Int)
+    {
+        self.updateSensorEnabledState(self.accelerometer.configurationCharacteristic, enabled: true)
+        
+        self.updateSensorMeasurementPeriod(self.accelerometer.periodCharacteristic, periodInMilliseconds: period)
+
+        self.updateSensorNotificationsEnabledState(self.accelerometer.dataCharacteristic, enabled: true)
+    }
+    
+    func accelerometerDisable(accelerometer: STGAccelerometer)
+    {
+        self.updateSensorEnabledState(self.accelerometer.configurationCharacteristic, enabled: false)
+    }
+
     func accelerometer(accelerometer : STGAccelerometer, didUpdateAcceleration acceleration : STGVector)
     {
         self.delegate.sensorTag(self, didUpdateAcceleration: acceleration)
@@ -173,22 +232,41 @@ public class STGSensorTag :
         }
     }
     
-    func barometricPressureSensor(sensor: STGBarometricPressureSensor, updateEnabledStateTo enabled: Bool)
+    func barometricPressureSensorEnable(sensor: STGBarometricPressureSensor, measurementPeriod period: Int)
     {
-        self.updateSensorEnabledState(self.barometricPressureSensor.configurationCharacteristic, enabled: enabled)
+        self.updateSensorEnabledState(self.barometricPressureSensor.configurationCharacteristic, enabled: true)
+    
+        self.updateSensorMeasurementPeriod(self.barometricPressureSensor.periodCharacteristic, periodInMilliseconds: period)
         
-        self.updateSensorNotificationsEnabledState(self.barometricPressureSensor.dataCharacteristic, enabled: enabled)
+        self.updateSensorNotificationsEnabledState(self.barometricPressureSensor.dataCharacteristic, enabled: true)
+    }
+    
+    func barometricPressureSensorDisable(sensor: STGBarometricPressureSensor)
+    {
+        self.updateSensorEnabledState(self.barometricPressureSensor.configurationCharacteristic, enabled: false)
+    }
+    
+    func barometricPressureSensor(sensor: STGBarometricPressureSensor, didUpdatePressure pressure: Int)
+    {
+        self.delegate.sensorTag(self, didUpdatePressure: pressure)
     }
     
     // MARK: STGGyroscopeDelegate
     
-    func gyroscope(gyroscope: STGGyroscope, updateEnabledStateTo enabled: Bool)
+    func gyroscopeEnable(gyroscope: STGGyroscope, measurementPeriod period: Int)
     {
         self.writeByte(self.gyroscope.configurationCharacteristic, byte: STGConstants.Gyroscope.enableByte)
         
-        self.updateSensorNotificationsEnabledState(self.gyroscope.dataCharacteristic, enabled: enabled)
+        self.updateSensorMeasurementPeriod(self.gyroscope.periodCharacteristic, periodInMilliseconds: period)
+
+        self.updateSensorNotificationsEnabledState(self.gyroscope.dataCharacteristic, enabled: true)
     }
 
+    func gyroscopeDisable(gyroscope: STGGyroscope)
+    {
+        self.updateSensorEnabledState(self.gyroscope.configurationCharacteristic, enabled: false)
+    }
+    
     func gyroscope(gyroscope: STGGyroscope, didUpdateAngularVelocity angularVelocity: STGVector)
     {
         self.delegate.sensorTag(self, didUpdateAngularVelocity: angularVelocity)
@@ -196,11 +274,18 @@ public class STGSensorTag :
     
     // MARK: STGHumiditySensorDelegate
 
-    func humiditySensor(humiditySensor: STGHumiditySensor, updateEnabledStateTo enabled: Bool)
+    func humiditySensorEnable(humiditySensor: STGHumiditySensor, measurementPeriod period: Int)
     {
-        self.updateSensorEnabledState(self.humiditySensor.configurationCharacteristic, enabled: enabled)
+        self.updateSensorEnabledState(self.humiditySensor.configurationCharacteristic, enabled: true)
         
-        self.updateSensorNotificationsEnabledState(self.humiditySensor.dataCharacteristic, enabled: enabled)
+        self.updateSensorMeasurementPeriod(self.humiditySensor.periodCharacteristic, periodInMilliseconds: period)
+
+        self.updateSensorNotificationsEnabledState(self.humiditySensor.dataCharacteristic, enabled: true)
+    }
+    
+    func humiditySensorDisable(humiditySensor: STGHumiditySensor)
+    {
+        self.updateSensorEnabledState(self.humiditySensor.configurationCharacteristic, enabled: false)
     }
     
     func humiditySensor(humiditySensor: STGHumiditySensor, didUpdateRelativeHumidity relativeHumidity: Float)
@@ -210,11 +295,18 @@ public class STGSensorTag :
     
     // MARK: STGMagnetometerDelegate
     
-    func magnetometer(magnetometer: STGMagnetometer, updateEnabledStateTo enabled: Bool)
+    func magnetometerEnable(magnetometer: STGMagnetometer, measurementPeriod period: Int)
     {
-        self.updateSensorEnabledState(self.magnetometer.configurationCharacteristic, enabled: enabled)
+        self.updateSensorEnabledState(self.magnetometer.configurationCharacteristic, enabled: true)
         
-        self.updateSensorNotificationsEnabledState(self.magnetometer.dataCharacteristic, enabled: enabled)
+        self.updateSensorMeasurementPeriod(self.magnetometer.periodCharacteristic, periodInMilliseconds: period)
+
+        self.updateSensorNotificationsEnabledState(self.magnetometer.dataCharacteristic, enabled: true)
+    }
+    
+    func magnetometerDisable(magnetometer: STGMagnetometer)
+    {
+        self.updateSensorEnabledState(self.magnetometer.configurationCharacteristic, enabled: false)
     }
     
     func magnetometer(magnetometer: STGMagnetometer, didUpdateMagneticFieldStrength magneticFieldStrength: STGVector)
@@ -222,18 +314,42 @@ public class STGSensorTag :
         self.delegate.sensorTag(self, didUpdateMagneticFieldStrength: magneticFieldStrength)
     }
 
-    // MARK: STGTemperatureSensorDelegate
-    
-    func temperatureSensor(temperatureSensor: STGTemperatureSensor, updateEnabledStateTo enabled: Bool)
+    // MARK: STGSimpleKeysServiceDelegate
+
+    func simpleKeysServiceEnable(simpleKeysService: STGSimpleKeysService)
     {
-        self.updateSensorEnabledState(self.temperatureSensor.configurationCharacteristic, enabled: enabled)
-        
-        self.updateSensorNotificationsEnabledState(self.temperatureSensor.dataCharacteristic, enabled: enabled)
+        self.updateSensorNotificationsEnabledState(self.simpleKeysService.dataCharacteristic, enabled: true)
     }
     
-    func temperatureSensor(temperatureSensor: STGTemperatureSensor, didUpdateTemperature temperature: Float)
+    func simpleKeysServiceDisable(simpleKeysService: STGSimpleKeysService)
     {
-        self.delegate.sensorTag(self, didUpdateTemperature: temperature)
+        self.updateSensorNotificationsEnabledState(self.simpleKeysService.dataCharacteristic, enabled: false)
+    }
+    
+    func simpleKeysService(simpleKeysService: STGSimpleKeysService, didUpdateState state: STGSimpleKeysState?)
+    {
+        self.delegate.sensorTag(self, didUpdateSimpleKeysState: state)
+    }
+    
+    // MARK: STGTemperatureSensorDelegate
+    
+    func temperatureSensorEnable(temperatureSensor: STGTemperatureSensor, measurementPeriod period: Int)
+    {
+        self.updateSensorEnabledState(self.temperatureSensor.configurationCharacteristic, enabled: true)
+        
+        self.updateSensorMeasurementPeriod(self.temperatureSensor.periodCharacteristic, periodInMilliseconds: period)
+
+        self.updateSensorNotificationsEnabledState(self.temperatureSensor.dataCharacteristic, enabled: true)
+    }
+    
+    func temperatureSensorDisable(temperatureSensor: STGTemperatureSensor)
+    {
+        self.updateSensorEnabledState(self.temperatureSensor.configurationCharacteristic, enabled: false)
+    }
+    
+    func temperatureSensor(temperatureSensor: STGTemperatureSensor, didUpdateAmbientTemperature temperature: Float)
+    {
+        self.delegate.sensorTag(self, didUpdateAmbientTemperature: temperature)
     }
     
     // MARK:
@@ -283,34 +399,6 @@ public class STGSensorTag :
             self.peripheral.writeValue(periodValue, forCharacteristic: characteristic, type: .WithResponse)
         }
     }
-    
-    public func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?)
-    {
-        switch characteristic.service.UUID
-        {
-        case self.accelerometer.serviceUUID:
-            self.accelerometer.characteristicUpdated(characteristic)
-            
-        case self.barometricPressureSensor.serviceUUID:
-            self.barometricPressureSensor.characteristicUpdated(characteristic)
-            
-        case self.gyroscope.serviceUUID:
-            self.gyroscope.characteristicUpdated(characteristic)
-
-        case self.humiditySensor.serviceUUID:
-            self.humiditySensor.characteristicUpdated(characteristic)
-
-        case self.magnetometer.serviceUUID:
-            self.magnetometer.characteristicUpdated(characteristic)
-
-        case self.temperatureSensor.serviceUUID:
-            self.temperatureSensor.characteristicUpdated(characteristic)
-
-        default:
-            break
-        }
-    }
-    
 }
 
 

@@ -9,6 +9,9 @@
 protocol STGBarometricPressureSensorDelegate : class
 {
     func barometricPressureSensorGetCalibrationValues(sensor: STGBarometricPressureSensor)
+        
+    func barometricPressureSensorEnable(sensor : STGBarometricPressureSensor, measurementPeriod period : Int)
+    func barometricPressureSensorDisable(sensor : STGBarometricPressureSensor)
     
-    func barometricPressureSensor(sensor : STGBarometricPressureSensor, updateEnabledStateTo enabled : Bool)
+    func barometricPressureSensor(sensor : STGBarometricPressureSensor, didUpdatePressure pressure : Int)
 }

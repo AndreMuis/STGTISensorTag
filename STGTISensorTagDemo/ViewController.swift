@@ -67,47 +67,66 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer: STGAccelerometer)
     {
-        // accelerometer.enable()
+        // accelerometer.enable(measurementPeriodInMilliseconds: 300, lowPassFilteringFactor: STGConstants.Accelerometer.lowPassFilteringFactor)
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForBarometricPressureSensor sensor: STGBarometricPressureSensor)
     {
-        // sensor.enable()
+        // sensor.enable(measurementPeriodInMilliseconds: 300)
     }
 
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForGyroscope gyroscope: STGGyroscope)
     {
-        // gyroscope.enable()
+        // gyroscope.enable(measurementPeriodInMilliseconds: 300)
     }
 
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForHumiditySensor humiditySensor: STGHumiditySensor)
     {
-        // humiditySensor.enable()
+        // humiditySensor.enable(measurementPeriodInMilliseconds: 300)
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForMagnetometer magnetometer: STGMagnetometer)
     {
-        // magnetometer.enable()
+        // magnetometer.enable(measurementPeriodInMilliseconds: 300)
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForSimpleKeysService simpleKeysService: STGSimpleKeysService)
+    {
+        // simpleKeysService.enable()
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForTemperatureSensor temperatureSensor: STGTemperatureSensor)
     {
-        temperatureSensor.enable()
+        // temperatureSensor.enable(measurementPeriodInMilliseconds: 300)
+        
+        self.sensorTag.readRSSI()
+    }
+    
+    
+    
+    func sensorTag(sensorTag: STGSensorTag, didUpdateRSSI rssi: NSNumber?)
+    {
+        print("RSSI = \(rssi)")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAcceleration acceleration: STGVector)
     {
         print("acceleration = \(acceleration)")
     }
-
+    
     func sensorTag(sensorTag: STGSensorTag, didUpdateSmoothedAcceleration acceleration: STGVector)
     {
-        print("smoothed acceleration = \(acceleration)")
+        // print("smoothed acceleration = \(acceleration)")
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didUpdatePressure pressure: Int)
+    {
+        print("pressure = \(pressure)")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAngularVelocity angularVelocity: STGVector)
     {
-        print("angular velocity = \(angularVelocity)")
+        print("angular velocity = \(angularVelocity.z)")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateRelativeHumidity relativeHumidity: Float)
@@ -117,12 +136,17 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
     {
-        print("magnetic field strength = \(magneticFieldStrength)")
+        print("magnetic field strength = \(magneticFieldStrength) " + NSDate().description)
     }
     
-    func sensorTag(sensorTag: STGSensorTag, didUpdateTemperature temperature: Float)
+    func sensorTag(sensorTag: STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
     {
-        print("temperature = \(temperature)")
+        print("simple keys state = \(state) " + NSDate().description)
+    }
+    
+    func sensorTag(sensorTag: STGSensorTag, didUpdateAmbientTemperature temperature: Float)
+    {
+        print("ambient temperature = \(temperature)")
     }
 }
 

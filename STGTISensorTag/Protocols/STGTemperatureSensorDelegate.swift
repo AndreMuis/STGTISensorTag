@@ -8,7 +8,8 @@
 
 protocol STGTemperatureSensorDelegate : class
 {
-    func temperatureSensor(temperatureSensor : STGTemperatureSensor, updateEnabledStateTo enabled : Bool)
-    
-    func temperatureSensor(temperatureSensor : STGTemperatureSensor, didUpdateTemperature temperature : Float)
+    func temperatureSensorEnable(temperatureSensor : STGTemperatureSensor, measurementPeriod period : Int)
+    func temperatureSensorDisable(temperatureSensor : STGTemperatureSensor)
+
+    func temperatureSensor(temperatureSensor : STGTemperatureSensor, didUpdateAmbientTemperature temperature : Float)
 }

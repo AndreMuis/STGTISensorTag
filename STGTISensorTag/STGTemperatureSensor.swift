@@ -12,6 +12,8 @@ public class STGTemperatureSensor
 {
     weak var delegate : STGTemperatureSensorDelegate?
 
+    var measurementPeriod : Int
+
     let serviceUUID : CBUUID
     var service : CBService?
     
@@ -28,6 +30,8 @@ public class STGTemperatureSensor
     {
         self.delegate = delegate
         
+        self.measurementPeriod = 0
+
         self.serviceUUID = CBUUID(string: STGConstants.TemperatureSensor.serviceUUIDString)
         self.service = nil
         
@@ -37,18 +41,20 @@ public class STGTemperatureSensor
         self.configurationCharacteristicUUID = CBUUID(string: STGConstants.TemperatureSensor.configurationCharacteristicUUIDString)
         self.configurationCharacteristic = nil
         
-        self.periodCharacteristicUUID = CBUUID(string: STGConstants.TemperatureSensor.configurationCharacteristicUUIDString)
+        self.periodCharacteristicUUID = CBUUID(string: STGConstants.TemperatureSensor.periodCharacteristicUUIDString)
         self.periodCharacteristic = nil
     }
     
-    public func enable()
+    public func enable(measurementPeriodInMilliseconds measurementPeriod : Int)
     {
-        self.delegate?.temperatureSensor(self, updateEnabledStateTo: true)
+        self.measurementPeriod = measurementPeriod
+        
+        self.delegate?.temperatureSensorEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.temperatureSensor(self, updateEnabledStateTo: false)
+        self.delegate?.temperatureSensorDisable(self)
     }
     
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -57,14 +63,14 @@ public class STGTemperatureSensor
         {
             if characteristic.UUID == self.dataCharacteristicUUID
             {
-                let temperature : Float = self.temperatureWithCharacteristicValue(value)
+                let ambientTemperature : Float = self.ambientTemperatureWithCharacteristicValue(value)
                 
-                self.delegate?.temperatureSensor(self, didUpdateTemperature: temperature)
+                self.delegate?.temperatureSensor(self, didUpdateAmbientTemperature: ambientTemperature)
             }
         }
     }
 
-    func temperatureWithCharacteristicValue(characteristicValue : NSData) -> Float
+    func ambientTemperatureWithCharacteristicValue(characteristicValue : NSData) -> Float
     {
         let bytes : [UInt8] = characteristicValue.unsignedIntegers
         
