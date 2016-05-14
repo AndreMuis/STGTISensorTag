@@ -1,0 +1,22 @@
+#####
+#
+# OS X temporary files that should never be committed
+#
+
+.DS_Store
+
+#####
+#
+#	Throws away all personal settings (including custom schemes - unless they are "shared")
+#
+
+xcuserdata
+
+#####
+#
+#	The data in this file does not represent state of your project.
+#	If you leave this file in git you will have merge conflicts.
+#
+
+*.xccheckout
+
