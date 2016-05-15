@@ -13,8 +13,12 @@ import STGTISensorTag
 
 class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagDelegate
 {
+    @IBOutlet weak var centralManagerStateLabel: UILabel!
+    @IBOutlet weak var connectionStatusLabel: UILabel!
+    @IBOutlet weak var rssiLabel: UILabel!
+    
     var centralManager : STGCentralManager!
-    var sensorTag : STGSensorTag!
+    var sensorTag : STGSensorTag?
     
     required init?(coder aDecoder: NSCoder)
     {
@@ -27,138 +31,265 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        self.centralManagerStateLabel.text = self.centralManager.state?.desscription
+        self.connectionStatusLabel.text = self.centralManager.connectionStatus?.rawValue
     }
+    
+    @IBAction func readRSSIButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag!.readRSSI()
+        }
+    }
+    
+    @IBAction func enableAccelerometerButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.accelerometer.enable(measurementPeriodInMilliseconds: 300, lowPassFilteringFactor: STGConstants.Accelerometer.lowPassFilteringFactor)
+        }
+    }
+    
+    @IBAction func disableAccelerometerButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.accelerometer.disable()
+        }
+    }
+    
+    @IBAction func enableBarometricPressureSensorButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.barometricPressureSensor.enable(measurementPeriodInMilliseconds: 300)
+        }
+    }
+    
+    @IBAction func disableBarometricPressureSensorButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.barometricPressureSensor.disable()
+        }
+    }
+    
+    @IBAction func enableGyroscopeButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.gyroscope.enable(measurementPeriodInMilliseconds: 300)
+        }
+    }
+    
+    @IBAction func disableGyroscopeButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.gyroscope.disable()
+        }
+    }
+    
+    @IBAction func enableHumiditySensorButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.humiditySensor.enable(measurementPeriodInMilliseconds: 300)
+        }
+    }
+    
+    @IBAction func disableHumiditySensorButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.humiditySensor.disable()
+        }
+    }
+    
+    @IBAction func enableMagnetometerButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.magnetometer.enable(measurementPeriodInMilliseconds: 300)
+        }
+    }
+    
+    @IBAction func disableMagnetometerButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.magnetometer.disable()
+        }
+    }
+    
+    @IBAction func enableSimpleKeysServiceButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.simpleKeysService.enable()
+        }
+    }
+    
+    @IBAction func disableSimpleKeysServiceButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.simpleKeysService.disable()
+        }
+    }
+    
+    @IBAction func enableTemperatureSensorButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.temperatureSensor.enable(measurementPeriodInMilliseconds: 300)
+        }
+    }
+    
+    @IBAction func disableTemperatureSensorButtonTapped(sender: AnyObject)
+    {
+        if self.sensorTag != nil
+        {
+            self.sensorTag?.temperatureSensor.disable()
+        }
+    }
+    
+    // MARK: STGCentralManagerDelegate
     
     func centralManagerDidUpdateState(state: STGCentralManagerState)
     {
-        print("STGCentralManagerState = \(state.desscription)")
+        self.centralManagerStateLabel.text = state.desscription
         
-        do
+        if (state == .PoweredOn)
         {
-            try self.centralManager.startScanningForSensorTags()
-        }
-        catch let error
-        {
-            print(error)
-        }
+            self.centralManager.startScanningForSensorTags()
+        }        
     }
-    
+
     func centralManagerDidUpdateConnectionStatus(status: STGCentralManagerConnectionStatus)
     {
-        print("STGCentralManagerConnectionStatus = \(status.rawValue)")
+        self.connectionStatusLabel.text = status.rawValue
     }
-    
+
     func centralManager(central: STGCentralManager, didConnectSensorTagPeripheral peripheral: CBPeripheral)
     {
-        print("didConnectSensorTagPeripheral")
-        
         self.sensorTag = STGSensorTag(delegate: self, peripheral: peripheral)
         
-        self.sensorTag.discoverServices()
+        self.sensorTag!.discoverServices()
     }
     
     func centralManager(central: STGCentralManager, didDisconnectSensorTagPeripheral peripheral: CBPeripheral)
     {
         self.sensorTag = nil
-
-        print("didDisconnectSensorTagPeripheral")
     }
     
     func centralManager(central: STGCentralManager, didEncounterError error: NSError)
     {
         print(error)
     }
-    
+
+    // MARK: STGSensorTagDelegate
+
+    func sensorTag(sensorTag: STGSensorTag, didUpdateRSSI rssi: NSNumber?)
+    {
+        if let someRSSI = rssi?.stringValue
+        {
+            self.rssiLabel.text = someRSSI
+        }
+        else
+        {
+            self.rssiLabel.text = ""
+        }
+    }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer: STGAccelerometer)
     {
-        // accelerometer.enable(measurementPeriodInMilliseconds: 300, lowPassFilteringFactor: STGConstants.Accelerometer.lowPassFilteringFactor)
+        print("sensor tag discovered characteristics for accelerometer")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForBarometricPressureSensor sensor: STGBarometricPressureSensor)
     {
-        // sensor.enable(measurementPeriodInMilliseconds: 300)
+        print("sensor tag discovered characteristics for barometric pressure sensor")
     }
 
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForGyroscope gyroscope: STGGyroscope)
     {
-        // gyroscope.enable(measurementPeriodInMilliseconds: 300)
+        print("sensor tag discovered characteristics for gyroscope")
     }
 
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForHumiditySensor humiditySensor: STGHumiditySensor)
     {
-        // humiditySensor.enable(measurementPeriodInMilliseconds: 300)
+        print("sensor tag discovered characteristics for humidity sensor")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForMagnetometer magnetometer: STGMagnetometer)
     {
-        // magnetometer.enable(measurementPeriodInMilliseconds: 300)
+        print("sensor tag discovered characteristics for magnetometer")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForSimpleKeysService simpleKeysService: STGSimpleKeysService)
     {
-        // simpleKeysService.enable()
+        print("sensor tag discovered characteristics for simple keys service")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForTemperatureSensor temperatureSensor: STGTemperatureSensor)
     {
-        temperatureSensor.enable(measurementPeriodInMilliseconds: 300)
-        
-        self.sensorTag.readRSSI()
+        print("sensor tag discovered characteristics for temperature sensor")
     }
     
     
-    
-    func sensorTag(sensorTag: STGSensorTag, didUpdateRSSI rssi: NSNumber?)
-    {
-        print("RSSI = \(rssi)")
-    }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAcceleration acceleration: STGVector)
     {
-        print("acceleration = \(acceleration)")
+        print("acceleration = \(acceleration) g")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateSmoothedAcceleration acceleration: STGVector)
     {
-        // print("smoothed acceleration = \(acceleration)")
+        // print("smoothed acceleration = \(acceleration) g")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdatePressure pressure: Int)
     {
-        print("pressure = \(pressure)")
+        print("pressure = \(pressure) millibars")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAngularVelocity angularVelocity: STGVector)
     {
-        print("angular velocity = \(angularVelocity)")
+        print("angular velocity = \(angularVelocity) degrees / sec")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateRelativeHumidity relativeHumidity: Float)
     {
-        print("relative humidity = \(relativeHumidity)")
+        print("relative humidity = \(relativeHumidity)%")
     }
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
     {
-        print("magnetic field strength = \(magneticFieldStrength)")
+        print("magnetic field strength = \(magneticFieldStrength) microteslas")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
     {
-        print("simple keys state = \(state) ")
+        if let someState = state
+        {
+            print("simple keys state = \(someState.desscription)")
+        }
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAmbientTemperature temperature: Float)
     {
-        print("ambient temperature = \(temperature)")
+        print("ambient temperature = \(temperature) degrees Celsius")
     }
     
-
     func sensorTag(sensorTag: STGSensorTag, didEncounterError error: NSError)
     {
         print(error)
     }
+    
+    // MARK:
 }
 
 

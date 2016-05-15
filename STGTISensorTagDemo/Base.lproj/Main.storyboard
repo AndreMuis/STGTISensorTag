@@ -1,26 +1,249 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="JA3-rr-ctP">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="2u9-AV-3gt">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="STGTISensorTagDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="JA3-rr-ctP" customClass="ViewController" customModule="STGTISensorTagDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="oLJ-hr-w3Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="CN3-lm-tjk"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <view key="view" contentMode="scaleToFill" id="gZ8-xa-oOu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STGTISensorTag Framework Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJh-JD-mxQ">
+                                <rect key="frame" x="23" y="30" width="274" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="274" id="SXg-5E-ihe"/>
+                                    <constraint firstAttribute="height" constant="21" id="mYs-HU-XoG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="central manager state:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eF2-Wz-9e1">
+                                <rect key="frame" x="20" y="69" width="174" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="qYM-91-0yU" userLabel="centralManagerStateLabel">
+                                <rect key="frame" x="202" y="69" width="98" height="21"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="connection status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dN7-T9-YfN">
+                                <rect key="frame" x="20" y="98" width="142" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="RSSI:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNk-mY-Xfn">
+                                <rect key="frame" x="20" y="139" width="41" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ij-dV-UpV" userLabel="rssiLabel">
+                                <rect key="frame" x="69" y="139" width="85" height="21"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LEw-CI-5cK" userLabel="readRSSIButton">
+                                <rect key="frame" x="183" y="135" width="71" height="30"/>
+                                <state key="normal" title="Read RSSI"/>
+                                <connections>
+                                    <action selector="readRSSIButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="AjZ-fB-kst"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Accelerometer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rcX-gg-sWk">
+                                <rect key="frame" x="20" y="176" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYG-UY-iIl" userLabel="enableAccelerometerButton">
+                                <rect key="frame" x="20" y="196" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableAccelerometerButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="4og-lh-CTt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fS1-VY-k8O" userLabel="disableAccelerometerButton">
+                                <rect key="frame" x="121" y="196" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableAccelerometerButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="CIM-7A-cfe"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Barometric Pressure Sensor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihi-z0-LMQ">
+                                <rect key="frame" x="20" y="232" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zu5-LE-6ox" userLabel="enableBarometricPressureSensorButton">
+                                <rect key="frame" x="20" y="252" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableBarometricPressureSensorButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="qut-ll-NVm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2N-Xk-EIF" userLabel="disableBarometricPressureSensorButton">
+                                <rect key="frame" x="121" y="252" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableBarometricPressureSensorButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="Qds-LO-OKD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Gyroscope" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDr-Bj-fbG">
+                                <rect key="frame" x="20" y="288" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1U-56-bvc" userLabel="enableGyroscopeButton">
+                                <rect key="frame" x="20" y="307" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableGyroscopeButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="cZd-6N-70K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AJI-uS-iTJ" userLabel="disableGyroscopeButton">
+                                <rect key="frame" x="121" y="307" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableGyroscopeButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="XV7-Rl-hLa"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Humidity Sensor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Wl-mL-Qna">
+                                <rect key="frame" x="20" y="343" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O4A-LX-BEd" userLabel="enableHumiditySensorButton">
+                                <rect key="frame" x="20" y="362" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableHumiditySensorButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="KEh-kg-37K"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lPN-sc-5ke" userLabel="disableHumiditySensorButton">
+                                <rect key="frame" x="121" y="362" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableHumiditySensorButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="FMn-rX-ADp"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Magnetometer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aIf-zN-HIB">
+                                <rect key="frame" x="20" y="398" width="114" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ss2-uA-hfH" userLabel="enableMagnetometerButton">
+                                <rect key="frame" x="20" y="417" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableMagnetometerButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="dwt-3p-S1N"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Rz-QG-mOL" userLabel="disableMagnetometerButton">
+                                <rect key="frame" x="121" y="417" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableMagnetometerButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="euy-Es-Kw7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Simple Keys Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3f-Tu-0qs">
+                                <rect key="frame" x="20" y="453" width="161" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3V3-oo-jhP" userLabel="enableSimpleKeysServiceButton">
+                                <rect key="frame" x="20" y="471" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableSimpleKeysServiceButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="dR6-cI-tPR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkd-wu-5Zd" userLabel="disableSimpleKeysServiceButton">
+                                <rect key="frame" x="121" y="471" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableSimpleKeysServiceButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="F74-DX-bFM"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Temperature Sensor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXA-kg-MlH">
+                                <rect key="frame" x="20" y="507" width="164" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gln-Ah-L19" userLabel="enableTemperatureSensorButton">
+                                <rect key="frame" x="20" y="526" width="50" height="30"/>
+                                <state key="normal" title="Enable"/>
+                                <connections>
+                                    <action selector="enableTemperatureSensorButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="uTx-ic-fr3"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e5R-hZ-ox1" userLabel="disableTemperatureSensorButton">
+                                <rect key="frame" x="121" y="526" width="51" height="30"/>
+                                <state key="normal" title="Disable"/>
+                                <connections>
+                                    <action selector="disableTemperatureSensorButtonTapped:" destination="JA3-rr-ctP" eventType="touchUpInside" id="T1v-mh-d5R"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="2u5-Ay-9QE" userLabel="connectionStatusLabel">
+                                <rect key="frame" x="170" y="98" width="130" height="21"/>
+                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                                        <color key="value" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jJh-JD-mxQ" firstAttribute="centerX" secondItem="gZ8-xa-oOu" secondAttribute="centerX" id="JpN-nY-gie"/>
+                            <constraint firstItem="jJh-JD-mxQ" firstAttribute="top" secondItem="oLJ-hr-w3Q" secondAttribute="bottom" constant="10" id="mIM-kL-4ut"/>
+                        </constraints>
                     </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="centralManagerStateLabel" destination="qYM-91-0yU" id="6OO-Nt-Ufd"/>
+                        <outlet property="connectionStatusLabel" destination="2u5-Ay-9QE" id="KBI-vI-vQ7"/>
+                        <outlet property="rssiLabel" destination="8ij-dV-UpV" id="wJG-H8-fQO"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kqf-6L-TO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="353" y="325"/>
         </scene>
     </scenes>
 </document>

@@ -8,6 +8,8 @@
 
 public protocol STGSensorTagDelegate : class
 {
+    func sensorTag(sensorTag : STGSensorTag, didUpdateRSSI rssi : NSNumber?)
+    
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer : STGAccelerometer)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForBarometricPressureSensor sensor : STGBarometricPressureSensor)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForGyroscope gyroscope : STGGyroscope)
@@ -15,8 +17,6 @@ public protocol STGSensorTagDelegate : class
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForMagnetometer magnetometer : STGMagnetometer)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForSimpleKeysService simpleKeysService : STGSimpleKeysService)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForTemperatureSensor temperatureSensor : STGTemperatureSensor)
-    
-    func sensorTag(sensorTag : STGSensorTag, didUpdateRSSI rssi : NSNumber?)
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateAcceleration acceleration : STGVector)
     func sensorTag(sensorTag : STGSensorTag, didUpdateSmoothedAcceleration acceleration : STGVector)

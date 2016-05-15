@@ -23,13 +23,13 @@ public class STGSensorTag :
     
     var peripheral : CBPeripheral!
  
-    var accelerometer : STGAccelerometer!
-    var barometricPressureSensor : STGBarometricPressureSensor!
-    var gyroscope : STGGyroscope!
-    var humiditySensor : STGHumiditySensor!
-    var magnetometer : STGMagnetometer!
-    var simpleKeysService : STGSimpleKeysService!
-    var temperatureSensor : STGTemperatureSensor!
+    public var accelerometer : STGAccelerometer!
+    public var barometricPressureSensor : STGBarometricPressureSensor!
+    public var gyroscope : STGGyroscope!
+    public var humiditySensor : STGHumiditySensor!
+    public var magnetometer : STGMagnetometer!
+    public var simpleKeysService : STGSimpleKeysService!
+    public var temperatureSensor : STGTemperatureSensor!
 
     public init(delegate : STGSensorTagDelegate, peripheral: CBPeripheral)
     {
@@ -179,6 +179,22 @@ public class STGSensorTag :
                     self.delegate.sensorTag(self, didEncounterError: error)
                 }
             }
+        }
+    }
+    
+    public func peripheral(peripheral: CBPeripheral, didWriteValueForCharacteristic characteristic: CBCharacteristic, error: NSError?)
+    {
+        if error != nil
+        {
+            self.delegate.sensorTag(self, didEncounterError: error!)
+        }
+    }
+    
+    public func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?)
+    {
+        if error != nil
+        {
+            self.delegate.sensorTag(self, didEncounterError: error!)
         }
     }
     

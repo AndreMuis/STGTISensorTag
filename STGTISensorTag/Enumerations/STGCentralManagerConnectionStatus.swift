@@ -10,8 +10,8 @@ import UIKit
 
 public enum STGCentralManagerConnectionStatus : String
 {
-    case None = "None"
-    case Scanning = "Scanning"
-    case Connecting = "Connecting"
-    case Connected = "Connected"
+    case None
+    case Scanning
+    case Connecting
+    case Connected
 }

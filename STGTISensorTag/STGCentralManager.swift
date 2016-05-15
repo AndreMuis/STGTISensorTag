@@ -12,77 +12,49 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
 {
     weak var delegate : STGCentralManagerDelegate!
     var centralManager : CBCentralManager!
-    var peripheral : CBPeripheral?
+    public var state : STGCentralManagerState?
     
+    public var connectionStatus : STGCentralManagerConnectionStatus?
+    {
+        willSet(newStatus)
+        {
+            self.delegate.centralManagerDidUpdateConnectionStatus(newStatus!)
+        }
+    }
+    
+    var peripheral : CBPeripheral?
+
     public init(delegate : STGCentralManagerDelegate)
     {
         super.init()
 
         self.delegate = delegate
         self.centralManager = CBCentralManager(delegate: self, queue: nil)
+        self.state = STGCentralManagerState.Unknown
+        self.connectionStatus = STGCentralManagerConnectionStatus.None
         self.peripheral = nil
     }
 
-    public func startScanningForSensorTags() throws
+    public func startScanningForSensorTags()
     {
-        do
-        {
-            try validateState()
-        }
-        catch let error
-        {
-            throw error
-        }
-        
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
         
-        self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
+        self.connectionStatus = .Scanning
     }
     
-    public func stopScanningForSensorTags() throws
+    public func stopScanningForSensorTags()
     {
-        do
-        {
-            try validateState()
-        }
-        catch let error
-        {
-            throw error
-        }
-        
         self.centralManager.stopScan()
         
-        self.delegate.centralManagerDidUpdateConnectionStatus(.None)
+        self.connectionStatus = .None
     }
     
-    func validateState() throws
-    {
-        switch self.centralManager.state
-        {
-        case .Unknown:
-            fallthrough
-            
-        case .Resetting:
-            fallthrough
-            
-        case .Unsupported:
-            fallthrough
-            
-        case .Unauthorized:
-            fallthrough
-            
-        case .PoweredOff:
-            throw STGCentralManagerError.NotInPoweredOnState
-            
-        case .PoweredOn:
-            break
-        }
-    }
-
     // MARK: CBCentralManagerDelegate
     
     public func centralManagerDidUpdateState(central: CBCentralManager)
     {
+        self.state = central.state
+        
         self.delegate.centralManagerDidUpdateState(central.state as STGCentralManagerState)
     }
     
@@ -95,7 +67,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
                 self.peripheral = peripheral
                 self.centralManager.connectPeripheral(peripheral, options: nil)
                 
-                self.delegate.centralManagerDidUpdateConnectionStatus(.Connecting)
+                self.connectionStatus = .Connecting
             }
         }
     }
@@ -104,7 +76,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
     {
         self.centralManager.stopScan()
 
-        self.delegate.centralManagerDidUpdateConnectionStatus(.Connected)
+        self.connectionStatus = .Connected
 
         self.delegate.centralManager(self, didConnectSensorTagPeripheral: peripheral)
     }
@@ -115,7 +87,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
         
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
         
-        self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
+        self.connectionStatus = .Scanning
         
         if let someError = error
         {
@@ -133,7 +105,7 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
         
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
 
-        self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
+        self.connectionStatus = .Scanning
 
         if let someError = error
         {

@@ -25,7 +25,6 @@
 		2AA2544C1CE3807500584873 /* STGTemperatureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2544B1CE3807500584873 /* STGTemperatureSensor.swift */; };
 		2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */; };
 		2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */; };
-		2AA5E7371CE29FEC00423F2E /* STGCentralManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */; };
 		2AB8F59D1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB8F59C1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift */; };
 		2AD9EB731CE3E08300D92050 /* STGHumiditySensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9EB721CE3E08300D92050 /* STGHumiditySensor.swift */; };
 		2AD9EB751CE3E0D200D92050 /* STGBarometricPressureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9EB741CE3E0D200D92050 /* STGBarometricPressureSensor.swift */; };
@@ -56,7 +55,6 @@
 		2AA2544B1CE3807500584873 /* STGTemperatureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGTemperatureSensor.swift; sourceTree = "<group>"; };
 		2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerDelegate.swift; path = Protocols/STGCentralManagerDelegate.swift; sourceTree = "<group>"; };
 		2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerConnectionStatus.swift; path = Enumerations/STGCentralManagerConnectionStatus.swift; sourceTree = "<group>"; };
-		2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerError.swift; path = Enumerations/STGCentralManagerError.swift; sourceTree = "<group>"; };
 		2AB8F59C1CE4D38600726D23 /* STGBarometricPressureSensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGBarometricPressureSensorDelegate.swift; path = Protocols/STGBarometricPressureSensorDelegate.swift; sourceTree = "<group>"; };
 		2AD9EB721CE3E08300D92050 /* STGHumiditySensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGHumiditySensor.swift; sourceTree = "<group>"; };
 		2AD9EB741CE3E0D200D92050 /* STGBarometricPressureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGBarometricPressureSensor.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 			children = (
 				2A3C3FD61CE7E2D200C686A1 /* STGCentralManagerState.swift */,
 				2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */,
-				2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */,
 				2A66875F1CE8F40000218EF6 /* STGSensorTagError.swift */,
 				2A3C3FCD1CE7D56900C686A1 /* STGSimpleKeysState.swift */,
 			);
@@ -245,7 +242,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2AA5E7371CE29FEC00423F2E /* STGCentralManagerError.swift in Sources */,
 				2A858DA21CE6AB7900B187B0 /* STGMagnetometerDelegate.swift in Sources */,
 				2AA254481CE3804100584873 /* STGMagnetometer.swift in Sources */,
 				2AD9EB751CE3E0D200D92050 /* STGBarometricPressureSensor.swift in Sources */,

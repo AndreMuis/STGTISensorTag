@@ -12,7 +12,7 @@ public typealias STGCentralManagerState = CBCentralManagerState
 
 public extension STGCentralManagerState
 {
-    var desscription : String
+    public var desscription : String
     {
         get
         {
