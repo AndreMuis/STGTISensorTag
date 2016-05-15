@@ -114,10 +114,17 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
         self.peripheral = nil
         
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
-
+        
         self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
-
-        self.delegate.centralManager(self, didDisconnectSensorTagPeripheral: peripheral)
+        
+        if let someError = error
+        {
+            self.delegate.centralManager(self, didEncounterError: someError)
+        }
+        else
+        {
+            self.delegate.centralManager(self, didDisconnectSensorTagPeripheral: peripheral)
+        }
     }
 
     public func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?)
@@ -127,6 +134,11 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
         self.centralManager.scanForPeripheralsWithServices(nil, options: nil)
 
         self.delegate.centralManagerDidUpdateConnectionStatus(.Scanning)
+
+        if let someError = error
+        {
+            self.delegate.centralManager(self, didEncounterError: someError)
+        }
     }
     
     // MARK:

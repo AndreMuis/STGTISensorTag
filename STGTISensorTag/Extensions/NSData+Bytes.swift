@@ -6,8 +6,6 @@
 //  Copyright © 2016 Andre Muis. All rights reserved.
 //
 
-import UIKit
-
 extension NSData
 {
     var unsignedIntegers : [UInt8]

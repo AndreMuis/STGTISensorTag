@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGMagnetometer
 {
-    weak var delegate : STGMagnetometerDelegate?
+    weak var delegate : STGMagnetometerDelegate!
 
     var measurementPeriod : Int
 
@@ -49,12 +49,12 @@ public class STGMagnetometer
     {
         self.measurementPeriod = measurementPeriod
         
-        self.delegate?.magnetometerEnable(self, measurementPeriod: measurementPeriod)
+        self.delegate.magnetometerEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.magnetometerDisable(self)
+        self.delegate.magnetometerDisable(self)
     }
 
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -65,14 +65,14 @@ public class STGMagnetometer
             {
                 let magneticFieldStrength : STGVector = self.magneticFieldStrengthWithCharacteristicValue(value)
                 
-                self.delegate?.magnetometer(self, didUpdateMagneticFieldStrength: magneticFieldStrength)
+                self.delegate.magnetometer(self, didUpdateMagneticFieldStrength: magneticFieldStrength)
             }
         }
     }
 
     func magneticFieldStrengthWithCharacteristicValue(characteristicValue : NSData) -> STGVector
     {
-        let bytes : [UInt8] = characteristicValue.unsignedIntegers;
+        let bytes : [UInt8] = characteristicValue.unsignedIntegers
         
         let xRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[0] & 0xff) | ((UInt32(bytes[1]) << 8) & 0xff00))
         let x : Float = -1.0 * (Float(xRaw) / 65536.0) * STGConstants.Magnetometer.range

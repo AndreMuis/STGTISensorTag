@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGBarometricPressureSensor
 {
-    weak var delegate : STGBarometricPressureSensorDelegate?
+    weak var delegate : STGBarometricPressureSensorDelegate!
     
     var measurementPeriod : Int
 
@@ -64,12 +64,12 @@ public class STGBarometricPressureSensor
     {
         self.measurementPeriod = measurementPeriod
         
-        self.delegate?.barometricPressureSensorGetCalibrationValues(self)
+        self.delegate.barometricPressureSensorGetCalibrationValues(self)
     }
     
     public func disable()
     {
-        self.delegate?.barometricPressureSensorDisable(self)
+        self.delegate.barometricPressureSensorDisable(self)
     }
     
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -80,13 +80,13 @@ public class STGBarometricPressureSensor
             {
                 self.getCalibrationValuesFromCharacteristicValue(value)
                 
-                self.delegate?.barometricPressureSensorEnable(self, measurementPeriod: self.measurementPeriod)
+                self.delegate.barometricPressureSensorEnable(self, measurementPeriod: self.measurementPeriod)
             }
             else if characteristic.UUID == self.dataCharacteristicUUID
             {
                 let pressure : Int = self.pressureWithCharacteristicValue(value)
              
-                self.delegate?.barometricPressureSensor(self, didUpdatePressure: pressure)
+                self.delegate.barometricPressureSensor(self, didUpdatePressure: pressure)
             }
         }
     }
@@ -108,17 +108,28 @@ public class STGBarometricPressureSensor
     
     func pressureWithCharacteristicValue(characteristicValue : NSData) -> Int
     {
-        let bytes : [UInt8] = characteristicValue.unsignedIntegers
-     
-        let temperature : Int = Int(UInt16(bytes[0] & 0xff) | ((UInt16(bytes[1]) << 8) & 0xff00))
+        var pressureInMillibars : Int = 0
         
-        let S : Int = Int(self.calibrationValue3!) + (Int(self.calibrationValue4!) * temperature) / (1 << 17) + (Int(self.calibrationValue5!) * (temperature * temperature)) / (1 << 34)
-        
-        let O : Int = Int(self.calibrationValue6!) * (1 << 14) + (Int(self.calibrationValue7!) * temperature) / (1 << 3) + (Int(self.calibrationValue8!) * (temperature * temperature)) / (1 << 19)
-        
-        let rawPressure : Int = Int(UInt16(bytes[2] & 0xff) | ((UInt16(bytes[3]) << 8) & 0xff00))
-        
-        let pressureInMillibars : Int = (((S * rawPressure) + O) / (1 << 14)) / 100
+        if let value3 = self.calibrationValue3,
+            let value4 = self.calibrationValue4,
+            let value5 = self.calibrationValue5,
+            let value6 = self.calibrationValue6,
+            let value7 = self.calibrationValue7,
+            let value8 = self.calibrationValue8
+        {
+            let bytes : [UInt8] = characteristicValue.unsignedIntegers
+         
+            let temperature : Int = Int(UInt16(bytes[0] & 0xff) | ((UInt16(bytes[1]) << 8) & 0xff00))
+            
+            let denominator : Int64 = (1 << 34)
+            let S : Int64 = Int64(value3) + (Int64(value4) * Int64(temperature)) / Int64(1 << 17) + (Int64(value5) * Int64(temperature * temperature)) / denominator
+            
+            let O : Int = Int(value6) * (1 << 14) + (Int(value7) * temperature) / (1 << 3) + (Int(value8) * (temperature * temperature)) / (1 << 19)
+            
+            let rawPressure : Int = Int(UInt16(bytes[2] & 0xff) | ((UInt16(bytes[3]) << 8) & 0xff00))
+            
+            pressureInMillibars = Int((((S * Int64(rawPressure)) + Int64(O)) / (1 << 14)) / 100)
+        }
         
         return pressureInMillibars
     }

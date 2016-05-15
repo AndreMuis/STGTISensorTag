@@ -11,11 +11,13 @@ public struct STGConstants
     static let advertisementDataLocalNameKey : String = "kCBAdvDataLocalName"
     static let advertisementDataLocalNameValue : String = "SensorTag"
     
-    static let sensorEnableByte : UInt8 = 0x01
-    static let sensorDisableByte : UInt8 = 0x00
+    static let defaultSensorEnableByte : UInt8 = 0x01
+    static let defaultSensorDisableByte : UInt8 = 0x00
 
     public static let defaultSensorMeasurementPeriodInMilliseconds : Int = 1000
 
+    static let errorDomain : String = "com.AndreMuis.STGTISensorTag"
+    
     public struct Accelerometer
     {
         static let serviceUUIDString : String = "F000AA10-0451-4000-B000-000000000000"

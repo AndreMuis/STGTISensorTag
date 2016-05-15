@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGSimpleKeysService
 {
-    weak var delegate : STGSimpleKeysServiceDelegate?
+    weak var delegate : STGSimpleKeysServiceDelegate!
     
     let serviceUUID : CBUUID
     var service : CBService?
@@ -31,12 +31,12 @@ public class STGSimpleKeysService
     
     public func enable()
     {
-        self.delegate?.simpleKeysServiceEnable(self)
+        self.delegate.simpleKeysServiceEnable(self)
     }
     
     public func disable()
     {
-        self.delegate?.simpleKeysServiceDisable(self)
+        self.delegate.simpleKeysServiceDisable(self)
     }
 
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -47,7 +47,7 @@ public class STGSimpleKeysService
             {
                 let state : STGSimpleKeysState? = self.simpleKeysStateWithCharacteristicValue(value)
                 
-                self.delegate?.simpleKeysService(self, didUpdateState: state)
+                self.delegate.simpleKeysService(self, didUpdateState: state)
             }
         }
     }

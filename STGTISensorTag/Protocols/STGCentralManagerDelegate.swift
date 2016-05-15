@@ -17,4 +17,6 @@ public protocol STGCentralManagerDelegate : class
     func centralManager(central: STGCentralManager, didConnectSensorTagPeripheral peripheral: CBPeripheral)
 
     func centralManager(central: STGCentralManager, didDisconnectSensorTagPeripheral peripheral: CBPeripheral)
+
+    func centralManager(central: STGCentralManager, didEncounterError error : NSError)
 }

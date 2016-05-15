@@ -23,13 +23,11 @@ public class STGSensorTag :
     
     var peripheral : CBPeripheral!
  
-    public var accelerometer : STGAccelerometer!
+    var accelerometer : STGAccelerometer!
     var barometricPressureSensor : STGBarometricPressureSensor!
-    var buttonSensor : STGButtonSensor!
     var gyroscope : STGGyroscope!
     var humiditySensor : STGHumiditySensor!
     var magnetometer : STGMagnetometer!
-    var rssiSensor : STGRSSISensor!
     var simpleKeysService : STGSimpleKeysService!
     var temperatureSensor : STGTemperatureSensor!
 
@@ -40,14 +38,13 @@ public class STGSensorTag :
         self.delegate = delegate
         
         self.peripheral = peripheral
-    
+        self.peripheral.delegate = self
+        
         self.accelerometer = STGAccelerometer(delegate: self)
         self.barometricPressureSensor = STGBarometricPressureSensor(delegate: self)
-        self.buttonSensor = STGButtonSensor()
         self.gyroscope = STGGyroscope(delegate: self)
         self.humiditySensor = STGHumiditySensor(delegate: self)
         self.magnetometer = STGMagnetometer(delegate: self)
-        self.rssiSensor = STGRSSISensor()
         self.simpleKeysService = STGSimpleKeysService(delegate: self)
         self.temperatureSensor = STGTemperatureSensor(delegate: self)
     }
@@ -59,15 +56,27 @@ public class STGSensorTag :
     
     public func discoverServices()
     {
-        self.peripheral.delegate = self;
-        self.peripheral.discoverServices(nil)
+        self.peripheral.discoverServices(
+            [
+                self.accelerometer.serviceUUID,
+                self.barometricPressureSensor.serviceUUID,
+                self.gyroscope.serviceUUID,
+                self.humiditySensor.serviceUUID,
+                self.magnetometer.serviceUUID,
+                self.simpleKeysService.serviceUUID,
+                self.temperatureSensor.serviceUUID
+            ])
     }
 
     // MARK: CBPeripheralDelegate
     
     public func peripheralDidUpdateRSSI(peripheral: CBPeripheral, error: NSError?)
     {
-        if error == nil
+        if let someError = error
+        {
+            self.delegate.sensorTag(self, didEncounterError: someError)
+        }
+        else
         {
             self.delegate.sensorTag(self, didUpdateRSSI: peripheral.RSSI)
         }
@@ -75,7 +84,11 @@ public class STGSensorTag :
 
     public func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?)
     {
-        if error == nil
+        if let someError = error
+        {
+            self.delegate.sensorTag(self, didEncounterError: someError)
+        }
+        else
         {
             if let services = peripheral.services
             {
@@ -89,7 +102,11 @@ public class STGSensorTag :
     
     public func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?)
     {
-        if error == nil
+        if let someError = error
+        {
+            self.delegate.sensorTag(self, didEncounterError: someError)
+        }
+        else
         {
             if let characteristics = service.characteristics
             {
@@ -158,7 +175,8 @@ public class STGSensorTag :
                     self.delegate.sensorTag(self, didDiscoverCharacteristicsForTemperatureSensor: self.temperatureSensor)
 
                 default:
-                    break
+                    let error : NSError = NSError(domain: STGConstants.errorDomain, code: STGSensorTagError.UnexpectedServiceDiscovered.code, userInfo: nil)
+                    self.delegate.sensorTag(self, didEncounterError: error)
                 }
             }
         }
@@ -166,31 +184,39 @@ public class STGSensorTag :
     
     public func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?)
     {
-        switch characteristic.service.UUID
+        if let someError = error
         {
-        case self.accelerometer.serviceUUID:
-            self.accelerometer.characteristicUpdated(characteristic)
-            
-        case self.barometricPressureSensor.serviceUUID:
-            self.barometricPressureSensor.characteristicUpdated(characteristic)
-            
-        case self.gyroscope.serviceUUID:
-            self.gyroscope.characteristicUpdated(characteristic)
-            
-        case self.humiditySensor.serviceUUID:
-            self.humiditySensor.characteristicUpdated(characteristic)
-            
-        case self.magnetometer.serviceUUID:
-            self.magnetometer.characteristicUpdated(characteristic)
-            
-        case self.simpleKeysService.serviceUUID:
-            self.simpleKeysService.characteristicUpdated(characteristic)
+            self.delegate.sensorTag(self, didEncounterError: someError)
+        }
+        else
+        {
+            switch characteristic.service.UUID
+            {
+            case self.accelerometer.serviceUUID:
+                self.accelerometer.characteristicUpdated(characteristic)
+                
+            case self.barometricPressureSensor.serviceUUID:
+                self.barometricPressureSensor.characteristicUpdated(characteristic)
+                
+            case self.gyroscope.serviceUUID:
+                self.gyroscope.characteristicUpdated(characteristic)
+                
+            case self.humiditySensor.serviceUUID:
+                self.humiditySensor.characteristicUpdated(characteristic)
+                
+            case self.magnetometer.serviceUUID:
+                self.magnetometer.characteristicUpdated(characteristic)
+                
+            case self.simpleKeysService.serviceUUID:
+                self.simpleKeysService.characteristicUpdated(characteristic)
 
-        case self.temperatureSensor.serviceUUID:
-            self.temperatureSensor.characteristicUpdated(characteristic)
-            
-        default:
-            break
+            case self.temperatureSensor.serviceUUID:
+                self.temperatureSensor.characteristicUpdated(characteristic)
+                
+            default:
+                let error : NSError = NSError(domain: STGConstants.errorDomain, code: STGSensorTagError.UnexpectedServiceDiscovered.code, userInfo: nil)
+                self.delegate.sensorTag(self, didEncounterError: error)
+            }
         }
     }
     
@@ -360,11 +386,11 @@ public class STGSensorTag :
         
         if (enabled == true)
         {
-            byte = STGConstants.sensorEnableByte
+            byte = STGConstants.defaultSensorEnableByte
         }
         else
         {
-            byte = STGConstants.sensorDisableByte
+            byte = STGConstants.defaultSensorDisableByte
         }
         
         self.writeByte(configurationCharacteristic, byte: byte)

@@ -51,9 +51,19 @@ unsigned << 7
 Int16(truncatingBitPattern: 0xffff)
 
 
-let a = 0xff00
+1 << 34
 
-a is UInt64
+Int64.max
+
+
+
+  
+
+
+
+
+
+
 
 
 

@@ -32,6 +32,8 @@ public protocol STGSensorTagDelegate : class
     func sensorTag(sensorTag : STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
 
     func sensorTag(sensorTag : STGSensorTag, didUpdateAmbientTemperature temperature : Float)
+
+    func sensorTag(sensorTag : STGSensorTag, didEncounterError error : NSError)
 }
 
 

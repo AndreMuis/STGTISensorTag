@@ -33,16 +33,13 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     {
         print("STGCentralManagerState = \(state.desscription)")
         
-        if (state == .PoweredOn)
+        do
         {
-            do
-            {
-                try self.centralManager.startScanningForSensorTags()
-            }
-            catch let error
-            {
-                print(error)
-            }
+            try self.centralManager.startScanningForSensorTags()
+        }
+        catch let error
+        {
+            print(error)
         }
     }
     
@@ -62,8 +59,16 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func centralManager(central: STGCentralManager, didDisconnectSensorTagPeripheral peripheral: CBPeripheral)
     {
+        self.sensorTag = nil
+
         print("didDisconnectSensorTagPeripheral")
     }
+    
+    func centralManager(central: STGCentralManager, didEncounterError error: NSError)
+    {
+        print(error)
+    }
+    
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer: STGAccelerometer)
     {
@@ -97,7 +102,7 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForTemperatureSensor temperatureSensor: STGTemperatureSensor)
     {
-        // temperatureSensor.enable(measurementPeriodInMilliseconds: 300)
+        temperatureSensor.enable(measurementPeriodInMilliseconds: 300)
         
         self.sensorTag.readRSSI()
     }
@@ -126,7 +131,7 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAngularVelocity angularVelocity: STGVector)
     {
-        print("angular velocity = \(angularVelocity.z)")
+        print("angular velocity = \(angularVelocity)")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateRelativeHumidity relativeHumidity: Float)
@@ -136,17 +141,23 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
     {
-        print("magnetic field strength = \(magneticFieldStrength) " + NSDate().description)
+        print("magnetic field strength = \(magneticFieldStrength)")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
     {
-        print("simple keys state = \(state) " + NSDate().description)
+        print("simple keys state = \(state) ")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAmbientTemperature temperature: Float)
     {
         print("ambient temperature = \(temperature)")
+    }
+    
+
+    func sensorTag(sensorTag: STGSensorTag, didEncounterError error: NSError)
+    {
+        print(error)
     }
 }
 

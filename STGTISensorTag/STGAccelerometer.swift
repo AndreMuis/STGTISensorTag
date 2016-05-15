@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGAccelerometer
 {
-    weak var delegate : STGAccelerometerDelegate?
+    weak var delegate : STGAccelerometerDelegate!
 
     var measurementPeriod : Int
     var lowPassFilteringFactor : Float
@@ -56,12 +56,12 @@ public class STGAccelerometer
         self.measurementPeriod = measurementPeriod
         self.lowPassFilteringFactor = lowPassFilteringFactor
         
-        self.delegate?.accelerometerEnable(self, measurementPeriod: measurementPeriod)
+        self.delegate.accelerometerEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.accelerometerDisable(self)
+        self.delegate.accelerometerDisable(self)
     }
     
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -71,10 +71,10 @@ public class STGAccelerometer
             if let value = characteristic.value
             {
                 let acceleration : STGVector = self.accelerationWithCharacteristicValue(value)
-                self.delegate?.accelerometer(self, didUpdateAcceleration: acceleration)
+                self.delegate.accelerometer(self, didUpdateAcceleration: acceleration)
                 
                 let smoothedAcceleration : STGVector = self.smoothedAccelerationWithCharacteristicValue(value)
-                self.delegate?.accelerometer(self, didUpdateSmoothedAcceleration: smoothedAcceleration)
+                self.delegate.accelerometer(self, didUpdateSmoothedAcceleration: smoothedAcceleration)
             }
         }
     }

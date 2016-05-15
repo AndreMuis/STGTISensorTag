@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGGyroscope
 {
-    weak var delegate : STGGyroscopeDelegate?
+    weak var delegate : STGGyroscopeDelegate!
 
     var measurementPeriod : Int
 
@@ -49,12 +49,12 @@ public class STGGyroscope
     {
         self.measurementPeriod = measurementPeriod
         
-        self.delegate?.gyroscopeEnable(self, measurementPeriod: measurementPeriod)
+        self.delegate.gyroscopeEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.gyroscopeDisable(self)
+        self.delegate.gyroscopeDisable(self)
     }
 
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -65,7 +65,7 @@ public class STGGyroscope
             {
                 let angularVelocity : STGVector = self.angularVelocityWithCharacteristicValue(value)
                 
-                self.delegate?.gyroscope(self, didUpdateAngularVelocity: angularVelocity)
+                self.delegate.gyroscope(self, didUpdateAngularVelocity: angularVelocity)
             }
         }
     }

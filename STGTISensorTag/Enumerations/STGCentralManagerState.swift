@@ -31,10 +31,10 @@ public extension STGCentralManagerState
                 return "Unauthorized"
             
             case PoweredOff:
-                return "PoweredOff"
+                return "Powered Off"
             
             case PoweredOn:
-                return "PoweredOn"
+                return "Powered On"
             }
         }
     }

@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGHumiditySensor
 {
-    weak var delegate : STGHumiditySensorDelegate?
+    weak var delegate : STGHumiditySensorDelegate!
 
     var measurementPeriod : Int
 
@@ -49,12 +49,12 @@ public class STGHumiditySensor
     {
         self.measurementPeriod = measurementPeriod
         
-        self.delegate?.humiditySensorEnable(self, measurementPeriod: measurementPeriod)
+        self.delegate.humiditySensorEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.humiditySensorDisable(self)
+        self.delegate.humiditySensorDisable(self)
     }
 
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -65,7 +65,7 @@ public class STGHumiditySensor
             {
                 let relativeHumidity : Float = self.relativeHumidityWithCharacteristicValue(value)
                 
-                self.delegate?.humiditySensor(self, didUpdateRelativeHumidity: relativeHumidity)
+                self.delegate.humiditySensor(self, didUpdateRelativeHumidity: relativeHumidity)
             }
         }
     }

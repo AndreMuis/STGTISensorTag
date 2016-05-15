@@ -13,16 +13,15 @@
 		2A3C3FD01CE7E1EC00C686A1 /* STGSensorTagDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3C3FCF1CE7E1EC00C686A1 /* STGSensorTagDelegate.swift */; };
 		2A3C3FD41CE7E26C00C686A1 /* NSData+Bytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3C3FD21CE7E26C00C686A1 /* NSData+Bytes.swift */; };
 		2A3C3FD71CE7E2D200C686A1 /* STGCentralManagerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A3C3FD61CE7E2D200C686A1 /* STGCentralManagerState.swift */; };
+		2A6687601CE8F40000218EF6 /* STGSensorTagError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A66875F1CE8F40000218EF6 /* STGSensorTagError.swift */; };
 		2A858D9E1CE6960100B187B0 /* STGGyroscopeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858D9D1CE6960100B187B0 /* STGGyroscopeDelegate.swift */; };
 		2A858DA01CE6A10800B187B0 /* STGHumiditySensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */; };
 		2A858DA21CE6AB7900B187B0 /* STGMagnetometerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */; };
 		2A858DA41CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */; };
 		2AA254401CE37C4300584873 /* STGSensorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2543F1CE37C4300584873 /* STGSensorTag.swift */; };
 		2AA254421CE37FF100584873 /* STGAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254411CE37FF100584873 /* STGAccelerometer.swift */; };
-		2AA254441CE3800E00584873 /* STGButtonSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254431CE3800E00584873 /* STGButtonSensor.swift */; };
 		2AA254461CE3802400584873 /* STGGyroscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254451CE3802400584873 /* STGGyroscope.swift */; };
 		2AA254481CE3804100584873 /* STGMagnetometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254471CE3804100584873 /* STGMagnetometer.swift */; };
-		2AA2544A1CE3805E00584873 /* STGRSSISensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254491CE3805E00584873 /* STGRSSISensor.swift */; };
 		2AA2544C1CE3807500584873 /* STGTemperatureSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2544B1CE3807500584873 /* STGTemperatureSensor.swift */; };
 		2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */; };
 		2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */; };
@@ -45,16 +44,15 @@
 		2A3C3FD21CE7E26C00C686A1 /* NSData+Bytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSData+Bytes.swift"; path = "Extensions/NSData+Bytes.swift"; sourceTree = "<group>"; };
 		2A3C3FD61CE7E2D200C686A1 /* STGCentralManagerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerState.swift; path = Enumerations/STGCentralManagerState.swift; sourceTree = "<group>"; };
 		2A426D6B1CE1A0350087F7FD /* ScratchPad.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ScratchPad.playground; sourceTree = "<group>"; };
+		2A66875F1CE8F40000218EF6 /* STGSensorTagError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGSensorTagError.swift; path = Enumerations/STGSensorTagError.swift; sourceTree = "<group>"; };
 		2A858D9D1CE6960100B187B0 /* STGGyroscopeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGGyroscopeDelegate.swift; path = Protocols/STGGyroscopeDelegate.swift; sourceTree = "<group>"; };
 		2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGHumiditySensorDelegate.swift; path = Protocols/STGHumiditySensorDelegate.swift; sourceTree = "<group>"; };
 		2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGMagnetometerDelegate.swift; path = Protocols/STGMagnetometerDelegate.swift; sourceTree = "<group>"; };
 		2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGTemperatureSensorDelegate.swift; path = Protocols/STGTemperatureSensorDelegate.swift; sourceTree = "<group>"; };
 		2AA2543F1CE37C4300584873 /* STGSensorTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGSensorTag.swift; sourceTree = "<group>"; };
 		2AA254411CE37FF100584873 /* STGAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGAccelerometer.swift; sourceTree = "<group>"; };
-		2AA254431CE3800E00584873 /* STGButtonSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGButtonSensor.swift; sourceTree = "<group>"; };
 		2AA254451CE3802400584873 /* STGGyroscope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGGyroscope.swift; sourceTree = "<group>"; };
 		2AA254471CE3804100584873 /* STGMagnetometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGMagnetometer.swift; sourceTree = "<group>"; };
-		2AA254491CE3805E00584873 /* STGRSSISensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGRSSISensor.swift; sourceTree = "<group>"; };
 		2AA2544B1CE3807500584873 /* STGTemperatureSensor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGTemperatureSensor.swift; sourceTree = "<group>"; };
 		2AA5E7311CE28AA200423F2E /* STGCentralManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerDelegate.swift; path = Protocols/STGCentralManagerDelegate.swift; sourceTree = "<group>"; };
 		2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGCentralManagerConnectionStatus.swift; path = Enumerations/STGCentralManagerConnectionStatus.swift; sourceTree = "<group>"; };
@@ -112,6 +110,7 @@
 				2A3C3FD61CE7E2D200C686A1 /* STGCentralManagerState.swift */,
 				2AA5E7341CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift */,
 				2AA5E7361CE29FEC00423F2E /* STGCentralManagerError.swift */,
+				2A66875F1CE8F40000218EF6 /* STGSensorTagError.swift */,
 				2A3C3FCD1CE7D56900C686A1 /* STGSimpleKeysState.swift */,
 			);
 			name = Enumerations;
@@ -156,11 +155,9 @@
 				2AA2543F1CE37C4300584873 /* STGSensorTag.swift */,
 				2AA254411CE37FF100584873 /* STGAccelerometer.swift */,
 				2AD9EB741CE3E0D200D92050 /* STGBarometricPressureSensor.swift */,
-				2AA254431CE3800E00584873 /* STGButtonSensor.swift */,
 				2AA254451CE3802400584873 /* STGGyroscope.swift */,
 				2AD9EB721CE3E08300D92050 /* STGHumiditySensor.swift */,
 				2AA254471CE3804100584873 /* STGMagnetometer.swift */,
-				2AA254491CE3805E00584873 /* STGRSSISensor.swift */,
 				2A3C3FC91CE7D07100C686A1 /* STGSimpleKeysService.swift */,
 				2AA2544B1CE3807500584873 /* STGTemperatureSensor.swift */,
 			);
@@ -260,15 +257,14 @@
 				2A858DA41CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift in Sources */,
 				2AA5E7351CE28E0B00423F2E /* STGCentralManagerConnectionStatus.swift in Sources */,
 				2A3C3FCA1CE7D07100C686A1 /* STGSimpleKeysService.swift in Sources */,
-				2AA2544A1CE3805E00584873 /* STGRSSISensor.swift in Sources */,
 				2AD9EB731CE3E08300D92050 /* STGHumiditySensor.swift in Sources */,
 				2AA254421CE37FF100584873 /* STGAccelerometer.swift in Sources */,
+				2A6687601CE8F40000218EF6 /* STGSensorTagError.swift in Sources */,
 				2A3C3FD41CE7E26C00C686A1 /* NSData+Bytes.swift in Sources */,
 				2A3C3FD01CE7E1EC00C686A1 /* STGSensorTagDelegate.swift in Sources */,
 				2AA254401CE37C4300584873 /* STGSensorTag.swift in Sources */,
 				2AA254461CE3802400584873 /* STGGyroscope.swift in Sources */,
 				2AD9EB781CE3F9BE00D92050 /* STGVector.swift in Sources */,
-				2AA254441CE3800E00584873 /* STGButtonSensor.swift in Sources */,
 				2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */,
 				2A858D9E1CE6960100B187B0 /* STGGyroscopeDelegate.swift in Sources */,
 				2AD9EB7A1CE3FD3F00D92050 /* STGAccelerometerDelegate.swift in Sources */,
@@ -382,6 +378,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = STGTISensorTag/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.STGTISensorTag;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -400,6 +397,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = STGTISensorTag/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.AndreMuis.STGTISensorTag;
 				PRODUCT_NAME = "$(TARGET_NAME)";

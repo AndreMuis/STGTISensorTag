@@ -10,7 +10,7 @@ import CoreBluetooth
 
 public class STGTemperatureSensor
 {
-    weak var delegate : STGTemperatureSensorDelegate?
+    weak var delegate : STGTemperatureSensorDelegate!
 
     var measurementPeriod : Int
 
@@ -49,12 +49,12 @@ public class STGTemperatureSensor
     {
         self.measurementPeriod = measurementPeriod
         
-        self.delegate?.temperatureSensorEnable(self, measurementPeriod: measurementPeriod)
+        self.delegate.temperatureSensorEnable(self, measurementPeriod: measurementPeriod)
     }
     
     public func disable()
     {
-        self.delegate?.temperatureSensorDisable(self)
+        self.delegate.temperatureSensorDisable(self)
     }
     
     func characteristicUpdated(characteristic : CBCharacteristic)
@@ -65,7 +65,7 @@ public class STGTemperatureSensor
             {
                 let ambientTemperature : Float = self.ambientTemperatureWithCharacteristicValue(value)
                 
-                self.delegate?.temperatureSensor(self, didUpdateAmbientTemperature: ambientTemperature)
+                self.delegate.temperatureSensor(self, didUpdateAmbientTemperature: ambientTemperature)
             }
         }
     }
