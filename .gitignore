@@ -20,3 +20,9 @@ xcuserdata
 
 *.xccheckout
 
+#####
+#
+#	CocoaPods
+#
+
+Pods
