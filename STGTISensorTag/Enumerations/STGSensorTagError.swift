@@ -16,9 +16,6 @@ enum STGSensorTagError : ErrorType
         {
         case .UnexpectedServiceDiscovered:
             return 1
-            
-        default:
-            return 0
         }
     }
 }

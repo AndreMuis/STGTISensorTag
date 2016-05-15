@@ -192,16 +192,9 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
 
     // MARK: STGSensorTagDelegate
 
-    func sensorTag(sensorTag: STGSensorTag, didUpdateRSSI rssi: NSNumber?)
+    func sensorTag(sensorTag: STGSensorTag, didUpdateRSSI rssi: NSNumber)
     {
-        if let someRSSI = rssi?.stringValue
-        {
-            self.rssiLabel.text = someRSSI
-        }
-        else
-        {
-            self.rssiLabel.text = ""
-        }
+        self.rssiLabel.text = rssi.stringValue
     }
     
     func sensorTag(sensorTag: STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer: STGAccelerometer)

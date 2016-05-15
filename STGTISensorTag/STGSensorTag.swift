@@ -70,7 +70,7 @@ public class STGSensorTag :
 
     // MARK: CBPeripheralDelegate
     
-    public func peripheralDidUpdateRSSI(peripheral: CBPeripheral, error: NSError?)
+    public func peripheral(peripheral: CBPeripheral, didReadRSSI RSSI: NSNumber, error: NSError?)
     {
         if let someError = error
         {
@@ -78,7 +78,7 @@ public class STGSensorTag :
         }
         else
         {
-            self.delegate.sensorTag(self, didUpdateRSSI: peripheral.RSSI)
+            self.delegate.sensorTag(self, didUpdateRSSI: RSSI)
         }
     }
 

@@ -8,7 +8,7 @@
 
 public protocol STGSensorTagDelegate : class
 {
-    func sensorTag(sensorTag : STGSensorTag, didUpdateRSSI rssi : NSNumber?)
+    func sensorTag(sensorTag : STGSensorTag, didUpdateRSSI rssi : NSNumber)
     
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForAccelerometer accelerometer : STGAccelerometer)
     func sensorTag(sensorTag : STGSensorTag, didDiscoverCharacteristicsForBarometricPressureSensor sensor : STGBarometricPressureSensor)
