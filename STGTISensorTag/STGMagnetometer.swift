@@ -63,14 +63,14 @@ public class STGMagnetometer
         {
             if characteristic.UUID == self.dataCharacteristicUUID
             {
-                let magneticFieldStrength : STGVector = self.magneticFieldStrengthWithCharacteristicValue(value)
+                let magneticField : STGVector = self.magneticFieldWithCharacteristicValue(value)
                 
-                self.delegate.magnetometer(self, didUpdateMagneticFieldStrength: magneticFieldStrength)
+                self.delegate.magnetometer(self, didUpdateMagneticField: magneticField)
             }
         }
     }
 
-    func magneticFieldStrengthWithCharacteristicValue(characteristicValue : NSData) -> STGVector
+    func magneticFieldWithCharacteristicValue(characteristicValue : NSData) -> STGVector
     {
         let bytes : [UInt8] = characteristicValue.unsignedIntegers
         
@@ -83,9 +83,9 @@ public class STGMagnetometer
         let zRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[4] & 0xff) | ((UInt32(bytes[5]) << 8) & 0xff00))
         let z : Float = (Float(zRaw) / 65536.0) * STGConstants.Magnetometer.range
 
-        let magneticFieldStrength : STGVector = STGVector(x: x, y: y, z: z)
+        let magneticField : STGVector = STGVector(x: x, y: y, z: z)
         
-        return magneticFieldStrength
+        return magneticField
     }
 }
 

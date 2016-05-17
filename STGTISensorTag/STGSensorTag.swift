@@ -288,9 +288,9 @@ public class STGSensorTag :
         self.updateSensorEnabledState(self.barometricPressureSensor.configurationCharacteristic, enabled: false)
     }
     
-    func barometricPressureSensor(sensor: STGBarometricPressureSensor, didUpdatePressure pressure: Int)
+    func barometricPressureSensor(sensor: STGBarometricPressureSensor, didUpdateBarometricPressure pressure: Int)
     {
-        self.delegate.sensorTag(self, didUpdatePressure: pressure)
+        self.delegate.sensorTag(self, didUpdateBarometricPressure: pressure)
     }
     
     // MARK: STGGyroscopeDelegate
@@ -351,9 +351,9 @@ public class STGSensorTag :
         self.updateSensorEnabledState(self.magnetometer.configurationCharacteristic, enabled: false)
     }
     
-    func magnetometer(magnetometer: STGMagnetometer, didUpdateMagneticFieldStrength magneticFieldStrength: STGVector)
+    func magnetometer(magnetometer: STGMagnetometer, didUpdateMagneticField magneticField: STGVector)
     {
-        self.delegate.sensorTag(self, didUpdateMagneticFieldStrength: magneticFieldStrength)
+        self.delegate.sensorTag(self, didUpdateMagneticField: magneticField)
     }
 
     // MARK: STGSimpleKeysServiceDelegate
@@ -389,7 +389,7 @@ public class STGSensorTag :
         self.updateSensorEnabledState(self.temperatureSensor.configurationCharacteristic, enabled: false)
     }
     
-    func temperatureSensor(temperatureSensor: STGTemperatureSensor, didUpdateAmbientTemperature temperature: Float)
+    func temperatureSensor(temperatureSensor: STGTemperatureSensor, didUpdateAmbientTemperature temperature: STGTemperature)
     {
         self.delegate.sensorTag(self, didUpdateAmbientTemperature: temperature)
     }

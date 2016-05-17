@@ -12,9 +12,9 @@ public class STGCentralManager : NSObject, CBCentralManagerDelegate
 {
     weak var delegate : STGCentralManagerDelegate!
     var centralManager : CBCentralManager!
-    public var state : STGCentralManagerState?
+    public var state : STGCentralManagerState!
     
-    public var connectionStatus : STGCentralManagerConnectionStatus?
+    public var connectionStatus : STGCentralManagerConnectionStatus!
     {
         willSet(newStatus)
         {

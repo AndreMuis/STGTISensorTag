@@ -244,7 +244,7 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
         // print("smoothed acceleration = \(acceleration) g")
     }
     
-    func sensorTag(sensorTag: STGSensorTag, didUpdatePressure pressure: Int)
+    func sensorTag(sensorTag: STGSensorTag, didUpdateBarometricPressure pressure: Int)
     {
         print("pressure = \(pressure) millibars")
     }
@@ -259,9 +259,9 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
         print("relative humidity = \(relativeHumidity)%")
     }
     
-    func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
+    func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticField magneticField : STGVector)
     {
-        print("magnetic field strength = \(magneticFieldStrength) microteslas")
+        print("magnetic field strength = \(magneticField) microteslas")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
@@ -272,9 +272,9 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
         }
     }
     
-    func sensorTag(sensorTag: STGSensorTag, didUpdateAmbientTemperature temperature: Float)
+    func sensorTag(sensorTag: STGSensorTag, didUpdateAmbientTemperature temperature: STGTemperature)
     {
-        print("ambient temperature = \(temperature) degrees Celsius")
+        print("ambient temperature = \(temperature.fahrenheit) degrees Fahrenheit")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didEncounterError error: NSError)

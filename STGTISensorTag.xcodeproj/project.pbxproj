@@ -18,6 +18,8 @@
 		2A858DA01CE6A10800B187B0 /* STGHumiditySensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */; };
 		2A858DA21CE6AB7900B187B0 /* STGMagnetometerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */; };
 		2A858DA41CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */; };
+		2A89D4B91CEA6EF6007E1582 /* STGFloat+Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89D4B81CEA6EF6007E1582 /* STGFloat+Format.swift */; };
+		2A89D4BB1CEA73FD007E1582 /* STGTemperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A89D4BA1CEA73FD007E1582 /* STGTemperature.swift */; };
 		2AA254401CE37C4300584873 /* STGSensorTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA2543F1CE37C4300584873 /* STGSensorTag.swift */; };
 		2AA254421CE37FF100584873 /* STGAccelerometer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254411CE37FF100584873 /* STGAccelerometer.swift */; };
 		2AA254461CE3802400584873 /* STGGyroscope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AA254451CE3802400584873 /* STGGyroscope.swift */; };
@@ -48,6 +50,8 @@
 		2A858D9F1CE6A10800B187B0 /* STGHumiditySensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGHumiditySensorDelegate.swift; path = Protocols/STGHumiditySensorDelegate.swift; sourceTree = "<group>"; };
 		2A858DA11CE6AB7900B187B0 /* STGMagnetometerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGMagnetometerDelegate.swift; path = Protocols/STGMagnetometerDelegate.swift; sourceTree = "<group>"; };
 		2A858DA31CE6E92E00B187B0 /* STGTemperatureSensorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGTemperatureSensorDelegate.swift; path = Protocols/STGTemperatureSensorDelegate.swift; sourceTree = "<group>"; };
+		2A89D4B81CEA6EF6007E1582 /* STGFloat+Format.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "STGFloat+Format.swift"; path = "Extensions/STGFloat+Format.swift"; sourceTree = "<group>"; };
+		2A89D4BA1CEA73FD007E1582 /* STGTemperature.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = STGTemperature.swift; path = Model/STGTemperature.swift; sourceTree = "<group>"; };
 		2AA2543F1CE37C4300584873 /* STGSensorTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGSensorTag.swift; sourceTree = "<group>"; };
 		2AA254411CE37FF100584873 /* STGAccelerometer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGAccelerometer.swift; sourceTree = "<group>"; };
 		2AA254451CE3802400584873 /* STGGyroscope.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGGyroscope.swift; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				2A3C3FD21CE7E26C00C686A1 /* NSData+Bytes.swift */,
+				2A89D4B81CEA6EF6007E1582 /* STGFloat+Format.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 		2AD9EB761CE3F92200D92050 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2A89D4BA1CEA73FD007E1582 /* STGTemperature.swift */,
 				2AD9EB771CE3F9BE00D92050 /* STGVector.swift */,
 			);
 			name = Models;
@@ -256,12 +262,14 @@
 				2AD9EB731CE3E08300D92050 /* STGHumiditySensor.swift in Sources */,
 				2AA254421CE37FF100584873 /* STGAccelerometer.swift in Sources */,
 				2A6687601CE8F40000218EF6 /* STGSensorTagError.swift in Sources */,
+				2A89D4BB1CEA73FD007E1582 /* STGTemperature.swift in Sources */,
 				2A3C3FD41CE7E26C00C686A1 /* NSData+Bytes.swift in Sources */,
 				2A3C3FD01CE7E1EC00C686A1 /* STGSensorTagDelegate.swift in Sources */,
 				2AA254401CE37C4300584873 /* STGSensorTag.swift in Sources */,
 				2AA254461CE3802400584873 /* STGGyroscope.swift in Sources */,
 				2AD9EB781CE3F9BE00D92050 /* STGVector.swift in Sources */,
 				2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */,
+				2A89D4B91CEA6EF6007E1582 /* STGFloat+Format.swift in Sources */,
 				2A858D9E1CE6960100B187B0 /* STGGyroscopeDelegate.swift in Sources */,
 				2AD9EB7A1CE3FD3F00D92050 /* STGAccelerometerDelegate.swift in Sources */,
 				2AA5E7321CE28AA200423F2E /* STGCentralManagerDelegate.swift in Sources */,

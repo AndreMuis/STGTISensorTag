@@ -11,5 +11,5 @@ protocol STGMagnetometerDelegate : class
     func magnetometerEnable(magnetometer : STGMagnetometer, measurementPeriod period : Int)
     func magnetometerDisable(magnetometer : STGMagnetometer)
 
-    func magnetometer(magnetometer : STGMagnetometer, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
+    func magnetometer(magnetometer : STGMagnetometer, didUpdateMagneticField magneticField : STGVector)
 }

@@ -13,5 +13,5 @@ protocol STGBarometricPressureSensorDelegate : class
     func barometricPressureSensorEnable(sensor : STGBarometricPressureSensor, measurementPeriod period : Int)
     func barometricPressureSensorDisable(sensor : STGBarometricPressureSensor)
     
-    func barometricPressureSensor(sensor : STGBarometricPressureSensor, didUpdatePressure pressure : Int)
+    func barometricPressureSensor(sensor : STGBarometricPressureSensor, didUpdateBarometricPressure pressure : Int)
 }

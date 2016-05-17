@@ -63,9 +63,9 @@ public class STGTemperatureSensor
         {
             if characteristic.UUID == self.dataCharacteristicUUID
             {
-                let ambientTemperature : Float = self.ambientTemperatureWithCharacteristicValue(value)
+                let temperature : STGTemperature = STGTemperature(celsius: self.ambientTemperatureWithCharacteristicValue(value))
                 
-                self.delegate.temperatureSensor(self, didUpdateAmbientTemperature: ambientTemperature)
+                self.delegate.temperatureSensor(self, didUpdateAmbientTemperature: temperature)
             }
         }
     }

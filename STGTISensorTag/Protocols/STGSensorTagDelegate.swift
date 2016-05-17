@@ -21,17 +21,17 @@ public protocol STGSensorTagDelegate : class
     func sensorTag(sensorTag : STGSensorTag, didUpdateAcceleration acceleration : STGVector)
     func sensorTag(sensorTag : STGSensorTag, didUpdateSmoothedAcceleration acceleration : STGVector)
 
-    func sensorTag(sensorTag : STGSensorTag, didUpdatePressure pressure : Int)
+    func sensorTag(sensorTag : STGSensorTag, didUpdateBarometricPressure barometricPressure : Int)
 
     func sensorTag(sensorTag : STGSensorTag, didUpdateAngularVelocity angularVelocity : STGVector)
     
     func sensorTag(sensorTag : STGSensorTag, didUpdateRelativeHumidity relativeHumidity : Float)
     
-    func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticFieldStrength magneticFieldStrength : STGVector)
+    func sensorTag(sensorTag : STGSensorTag, didUpdateMagneticField magneticField : STGVector)
 
     func sensorTag(sensorTag : STGSensorTag, didUpdateSimpleKeysState state: STGSimpleKeysState?)
 
-    func sensorTag(sensorTag : STGSensorTag, didUpdateAmbientTemperature temperature : Float)
+    func sensorTag(sensorTag : STGSensorTag, didUpdateAmbientTemperature temperature : STGTemperature)
 
     func sensorTag(sensorTag : STGSensorTag, didEncounterError error : NSError)
 }

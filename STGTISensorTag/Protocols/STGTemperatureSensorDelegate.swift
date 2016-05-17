@@ -11,5 +11,5 @@ protocol STGTemperatureSensorDelegate : class
     func temperatureSensorEnable(temperatureSensor : STGTemperatureSensor, measurementPeriod period : Int)
     func temperatureSensorDisable(temperatureSensor : STGTemperatureSensor)
 
-    func temperatureSensor(temperatureSensor : STGTemperatureSensor, didUpdateAmbientTemperature temperature : Float)
+    func temperatureSensor(temperatureSensor : STGTemperatureSensor, didUpdateAmbientTemperature temperature : STGTemperature)
 }

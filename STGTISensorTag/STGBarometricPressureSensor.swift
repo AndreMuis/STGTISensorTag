@@ -86,7 +86,7 @@ public class STGBarometricPressureSensor
             {
                 let pressure : Int = self.pressureWithCharacteristicValue(value)
              
-                self.delegate.barometricPressureSensor(self, didUpdatePressure: pressure)
+                self.delegate.barometricPressureSensor(self, didUpdateBarometricPressure: pressure)
             }
         }
     }
