@@ -12,6 +12,13 @@ public struct STGVector : CustomStringConvertible
     public var y : Float
     public var z : Float
     
+    public init(x : Float, y : Float, z : Float)
+    {
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+    
     public var magnitude : Float
     {
         return sqrt(x * x + y * y + z * z)

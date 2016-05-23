@@ -35,6 +35,7 @@
 		2AF4EF501CE18C7B006C2AC7 /* STGTISensorTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AF4EF4F1CE18C7B006C2AC7 /* STGTISensorTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2AF4EF5E1CE196F5006C2AC7 /* STGCentralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */; };
 		2AF4EF5F1CE196F5006C2AC7 /* STGConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */; };
+		2AF669D81CF27396006C36BC /* STGFloat+AngleUnitConversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AF669D71CF27396006C36BC /* STGFloat+AngleUnitConversion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		2AF4EF511CE18C7B006C2AC7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2AF4EF5C1CE196F5006C2AC7 /* STGCentralManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGCentralManager.swift; sourceTree = "<group>"; };
 		2AF4EF5D1CE196F5006C2AC7 /* STGConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STGConstants.swift; sourceTree = "<group>"; };
+		2AF669D71CF27396006C36BC /* STGFloat+AngleUnitConversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "STGFloat+AngleUnitConversion.swift"; path = "Extensions/STGFloat+AngleUnitConversion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				2A3C3FD21CE7E26C00C686A1 /* NSData+Bytes.swift */,
+				2AF669D71CF27396006C36BC /* STGFloat+AngleUnitConversion.swift */,
 				2A89D4B81CEA6EF6007E1582 /* STGFloat+Format.swift */,
 			);
 			name = Extensions;
@@ -253,6 +256,7 @@
 				2AD9EB751CE3E0D200D92050 /* STGBarometricPressureSensor.swift in Sources */,
 				2AA2544C1CE3807500584873 /* STGTemperatureSensor.swift in Sources */,
 				2A3C3FD71CE7E2D200C686A1 /* STGCentralManagerState.swift in Sources */,
+				2AF669D81CF27396006C36BC /* STGFloat+AngleUnitConversion.swift in Sources */,
 				2A3C3FCE1CE7D56900C686A1 /* STGSimpleKeysState.swift in Sources */,
 				2A3C3FCC1CE7D10600C686A1 /* STGSimpleKeysServiceDelegate.swift in Sources */,
 				2A858DA01CE6A10800B187B0 /* STGHumiditySensorDelegate.swift in Sources */,

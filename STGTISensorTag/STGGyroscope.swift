@@ -75,13 +75,16 @@ public class STGGyroscope
         let bytes : [UInt8] = characteristicValue.unsignedIntegers
     
         let xRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[0] & 0xff) | ((UInt32(bytes[1]) << 8) & 0xff00))
-        let x : Float = -1.0 * ((Float(xRaw) / 65536.0) * STGConstants.Gyroscope.range)
+        var x : Float = -1.0 * ((Float(xRaw) / 65536.0) * STGConstants.Gyroscope.range)
+        x = x.degreesToRadians
         
         let yRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[2] & 0xff) | ((UInt32(bytes[3]) << 8) & 0xff00))
-        let y : Float = -1.0 * ((Float(yRaw) / 65536.0) * STGConstants.Gyroscope.range)
+        var y : Float = -1.0 * ((Float(yRaw) / 65536.0) * STGConstants.Gyroscope.range)
+        y = y.degreesToRadians
 
         let zRaw : Int16 = Int16(truncatingBitPattern: UInt32(bytes[4] & 0xff) | ((UInt32(bytes[5]) << 8) & 0xff00))
-        let z : Float = (Float(zRaw) / 65536.0) * STGConstants.Gyroscope.range
+        var z : Float = (Float(zRaw) / 65536.0) * STGConstants.Gyroscope.range
+        z = z.degreesToRadians
         
         let angularVelocity = STGVector(x: x, y: y, z: z)
         

@@ -11,8 +11,8 @@ public struct STGConstants
     static let advertisementDataLocalNameKey : String = "kCBAdvDataLocalName"
     static let advertisementDataLocalNameValue : String = "SensorTag"
     
-    public static let rssiMinimum : Float = -100.0;
-    public static let rssiMaximum : Float = 0.0;
+    public static let rssiMinimum : Float = -100.0
+    public static let rssiMaximum : Float = 0.0
 
     static let defaultSensorEnableByte : UInt8 = 0x01
     static let defaultSensorDisableByte : UInt8 = 0x00
@@ -75,8 +75,8 @@ public struct STGConstants
         static let periodCharacteristicUUIDString : String = "F000AA33-0451-4000-B000-000000000000"
 
         static let range : Float = 2000.0
-        public static let magneticFieldStrengthMinimum : Float = 0.0;
-        public static let magneticFieldStrengthMaximum : Float = 300.0;
+        public static let magneticFieldStrengthMinimum : Float = 0.0
+        public static let magneticFieldStrengthMaximum : Float = 300.0
     }
     
     public struct SimpleKeysService

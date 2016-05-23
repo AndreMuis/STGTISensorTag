@@ -251,7 +251,7 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateAngularVelocity angularVelocity: STGVector)
     {
-        print("angular velocity = \(angularVelocity) degrees / sec")
+        print("angular velocity = \(angularVelocity) rads / sec")
     }
     
     func sensorTag(sensorTag: STGSensorTag, didUpdateRelativeHumidity relativeHumidity: Float)
