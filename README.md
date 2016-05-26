@@ -28,7 +28,7 @@ pod 'STGTISensorTag', '1.0.3'
 
 ## Usage
 
-The easiest to way to learn about and get started with the STGTISensorTag framework is to download and run the STGTISensorTagDemo project.
+NOTE: The easiest way to learn about and get started with the STGTISensorTag framework is to download and run the STGTISensorTagDemo project.
 
 Import STGTISensorTag framework:
 
