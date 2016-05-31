@@ -162,7 +162,7 @@ class ViewController: UIViewController, STGCentralManagerDelegate, STGSensorTagD
     {
         self.centralManagerStateLabel.text = state.desscription
         
-        if (state == .PoweredOn)
+        if (state == STGCentralManagerState.PoweredOn)
         {
             self.centralManager.startScanningForSensorTags()
         }        
